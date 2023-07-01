@@ -175,20 +175,6 @@ const Personal_info = () => {
                 {formik.values.isAvailable === "no" && (
                     <label className="grid grid-cols-2 items-center">
                         <span>Available Date</span>
-                        <Flatpickr
-                            name="availableDate"
-                            className="flex w-full bg-neutral-50 rounded-md h-9"
-                            onChange={(date) => {
-                                formik.setFieldValue("availableDate", date);
-                            }}
-                            placeholder="MM-DD-YYYY"
-                            options={{
-                                minDate: new Date(),
-                                enableTime: false,
-                                dateFormat: "m-d-Y",
-                            }}
-                            value={formik.values.availableDate}
-                        />
                         {formik.touched.availableDate && formik.errors.availableDate ? (
                             <div className="text-red-500 text-xs col-start-2 mt-1">
                                 {formik.errors.availableDate}
