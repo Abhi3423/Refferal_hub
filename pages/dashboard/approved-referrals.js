@@ -43,7 +43,7 @@ function approved_referrals() {
                    
                     <tbody>
                     {user.map((item,key)=>{
-                        return <tr className="border-b dark:border-gray-700 ">
+                        return <tr className="border-b dark:border-gray-700 " key={index}>
                         <td className="px-4 py-3">{key+1}</td>
                             <th scope="row" className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">{item.name}</th>
                             <td className="px-4 py-3">{item.userEmail}</td>
