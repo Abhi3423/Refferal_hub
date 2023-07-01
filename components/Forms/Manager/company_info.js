@@ -7,12 +7,7 @@ import { useRouter } from "next/router";
 
 const Company_info = () => {
   const user = useContext(AuthContext);
-  const { setCurrentUserDetails } = useContext(AuthContext);
-
-  console.log(user);
-  useEffect(() => {
-    console.log(user?.currentUserDetails);
-  }, [user?.currentUserDetails]);
+  const { setFullDetails, fullDetails } = useContext(AuthContext);
 
   const formik = useFormik({
     initialValues: {
@@ -30,29 +25,26 @@ const Company_info = () => {
         .min(1, "Minimum 1 month of service required"),
     }),
     onSubmit: async (values) => {
-      setCurrentUserDetails({
-        ...user.currentUserDetails,
-        company: values
-      });
-      console.log(user.currentUserDetails)
+      // setFullDetails({ ...fullDetails, company: values });
 
       try {
-
         const res = await fetch("/api/data/create_hirer", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(user.currentUserDetails),
+          body: JSON.stringify({
+            email: user?.currentUserDetails?.email,
+            name: user?.currentUserDetails?.name,
+            photo: user?.currentUserDetails?.photo,
+            ...fullDetails,
+            company: values,
+          }),
         });
-
         console.log(res);
-
       } catch (error) {
         console.error(error);
       }
-
-
       if (user?.step < 3) user?.setstep((e) => e + 1);
       console.log(values);
     },

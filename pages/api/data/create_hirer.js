@@ -3,10 +3,10 @@ import { collection, getDocs, addDoc, where, query } from "firebase/firestore";
 
 export default async function createUser(req, res) {
   try {
-    const { data } = req.body;
-    console.log(data.email)
+    const data = req.body;
+
     const user = collection(db, "refferar");
-    const q = query(user, where("email", "==", data.email));
+    const q = query(user, where("email", "==", data?.email));
     const querySnapshot = await getDocs(q);
     if (querySnapshot.empty) {
       const docRef = await addDoc(user, {

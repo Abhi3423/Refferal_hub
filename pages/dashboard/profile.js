@@ -4,20 +4,16 @@ import { useContext } from "react";
 import { AuthContext } from "@/context/AuthContext";
 import Image from "next/image";
 
-
 function Profile() {
-
   const user = useContext(AuthContext);
 
   useEffect(() => {
-    console.log(user?.currentUserDetails);
+    // console.log(user?.currentUserDetails);
   }, [user?.currentUserDetails]);
-
 
   return (
     <Layout>
       <div className="w-full bg-white rounded-lg p-4">
-
         <div className="flex gap-3 w-full items-center">
           <span className="block h-[0.5px] w-[4%] bg-slate-400 top-1/2 right-0 transform -translate-y-1/2"></span>
           <span className="text-sm font-semibold whitespace-nowrap">
@@ -27,7 +23,6 @@ function Profile() {
         </div>
 
         <div className="flex flex-col">
-
           <div className="flex justify-center w-full my-2">
             <Image
               className="rounded-full"
@@ -97,16 +92,7 @@ function Profile() {
               />
             </div>
           </div>
-
         </div>
-
-
-
-
-
-
-
-
 
         <div className="flex gap-3 w-full items-center">
           <span className="block h-[0.5px] w-[4%] bg-slate-400 top-1/2 right-0 transform -translate-y-1/2"></span>

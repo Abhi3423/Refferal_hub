@@ -20,14 +20,37 @@ const inter = Inter({ subsets: ["latin"] });
 export default function Home() {
   const currentUser = useContext(AuthContext);
   const router = useRouter();
+
+  const allDetailsFilled = async () => {
+    const data = await fetch("/api/user", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: currentUser?.currentUserDetails?.email,
+      }),
+    });
+
+    if (data?.data && data?.data?.name) return true;
+    return false;
+  };
+
   const handelSignUp = async (e) => {
     e.preventDefault();
-    try {
-      const res = await currentUser?.SignInWithGooglePopUp();
-      if (res) router.push("/dashboard");
-      else console.log("PopUp Failed");
-    } catch (error) {
-      console.log(error.message);
+    if (!currentUser?.currentUser) {
+      try {
+        const res = await currentUser?.SignInWithGooglePopUp();
+        if (res) {
+          const isvaild = await allDetailsFilled();
+          if (isvaild) router.push("/dashboard/profile");
+          else router.push("/dashboard");
+        }
+      } catch (error) {
+        console.log(error.message);
+      }
+    } else {
+      router.push("/dashboard/profile");
     }
   };
   return (
@@ -48,20 +71,36 @@ export default function Home() {
               </div>
               <div className="column align-right">
                 <div className="row items-center">
-                  <Link href="#" className="u mr-lg">
-                    Log in
-                  </Link>
-                  <div
-                    // href="/dashboard"
-                    className="button main w-button"
-                    onClick={(e) => handelSignUp(e)}>
-                    Sign in
-                    <span
-                      data-feather="arrow-right"
-                      className="icon mr-md-n ml-md">
-                      •
-                    </span>
-                  </div>
+                  {!currentUser.currentUser && (
+                    <Link href="#" className="u mr-lg">
+                      Log in
+                    </Link>
+                  )}
+                  {!currentUser.currentUser ? (
+                    <div
+                      className="button main w-button"
+                      onClick={(e) => handelSignUp(e)}>
+                      Sign in
+                      <span
+                        data-feather="arrow-right"
+                        className="icon mr-md-n ml-md">
+                        •
+                      </span>
+                    </div>
+                  ) : (
+                    <div
+                      className=" flex p-2 gap-4 items-center cursor-pointer font-medium hover:text-slate-900"
+                      onClick={(e) => handelSignUp(e)}>
+                      {currentUser?.currentUserDetails?.name}..
+                      <Image
+                        src={currentUser?.currentUserDetails?.photo}
+                        alt="user"
+                        width={45}
+                        height={45}
+                        className="rounded-full cursor-pointer"
+                      />
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
