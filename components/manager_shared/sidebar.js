@@ -1,126 +1,120 @@
-import classNames from "classnames";
-import Link from "next/link";
+import React, { Fragment, useState, useEffect } from "react";
+import { FaSignOutAlt, FaBars } from "react-icons/fa";
+import { AiTwotoneAppstore } from "react-icons/ai";
+import { IoPersonAddSharp } from "react-icons/io5";
+import { FaClipboardList } from "react-icons/fa";
+import { AiFillCheckCircle } from "react-icons/ai";
 import { useRouter } from "next/router";
-import React, { useState, useMemo } from "react";
+import Link from "next/link";
 
-const menuItems = [
-  { id: 1, label: "Profile", link: "/dashboard/profile" },
-  { id: 2, label: "Create Referral", link: "/dashboard/create-referral" },
-  { id: 3, label: "Referral Invitations", link: "/dashboard/invite-referrals" },
-  { id: 4, label: "Referrals approved", link: "/dashboard/approved-referrals" },
-];
-
-const Sidebar = () => {
-  const [toggleCollapse, setToggleCollapse] = useState(false);
-  const [isCollapsible, setIsCollapsible] = useState(false);
+const Navbar = ({ children }) => {
+  const routeLinks = [
+    {
+      icon: <AiTwotoneAppstore />,
+      display: "Profile",
+      to: "/dashboard/profile",
+    },
+    {
+      icon: <IoPersonAddSharp />,
+      display: "Create Referral",
+      to: "/dashboard/create-referral",
+    },
+    {
+      icon: <FaClipboardList />,
+      display: "Referral Invitations",
+      to: "/dashboard/invite-referrals",
+    },
+    {
+      icon: <AiFillCheckCircle />,
+      display: "Referrals approved",
+      to: "/dashboard/approved-referrals",
+    },
+  ];
 
   const router = useRouter();
+  const [activeLink, setActiveLink] = useState("");
 
-  const activeMenu = useMemo(
-    () => menuItems.find((menu) => menu.link === router.pathname),
-    [router.pathname]
-  );
+  useEffect(() => {
+    const currentPath = router.asPath;
+    setActiveLink(currentPath);
+  }, [router.asPath]);
+  const [sidebar, setSidebar] = useState(true);
 
-  const wrapperClasses = classNames(
-    "h-screen px-4 pt-8 pb-4 bg-light flex justify-between flex-col",
-    {
-      ["w-80"]: !toggleCollapse,
-      ["w-20"]: toggleCollapse,
-    }
-  );
-
-  const collapseIconClasses = classNames(
-    "p-4 rounded bg-light-lighter absolute right-0",
-    {
-      "rotate-180": toggleCollapse,
-    }
-  );
-
-  const getNavItemClasses = (menu) => {
-    return classNames(
-      "flex items-center cursor-pointer hover:bg-light-lighter rounded w-full overflow-hidden whitespace-nowrap",
-      {
-        ["bg-light-lighter"]: activeMenu.id === menu.id,
-      }
-    );
-  };
-
-  const onMouseOver = () => {
-    setIsCollapsible(!isCollapsible);
-  };
-
-  const handleSidebarToggle = () => {
-    setToggleCollapse(!toggleCollapse);
-  };
+  function handleClick() {
+    setSidebar(!sidebar);
+  }
 
   return (
-    <div
-      className={wrapperClasses}
-      onMouseEnter={onMouseOver}
-      onMouseLeave={onMouseOver}
-      style={{ transition: "width 300ms cubic-bezier(0.2, 0, 0, 1) 0s" }}
-    >
-      <div className="flex flex-col">
-        <div className="flex items-center justify-between relative">
-          <div className="flex items-center pl-1 gap-4">
-            ---
-            <span
-              className={classNames("mt-2 text-lg font-medium text-text", {
-                hidden: toggleCollapse,
-              })}
-            >
-              Logo
-            </span>
+    <Fragment>
+
+      <div className="fixed w-full flex justify-between items-center bg-blue-50 z-30 drop-shadow py-2.5 px-2">
+        <div className="flex gap-2 items-center order-first">
+          <button
+            onClick={handleClick}
+            className="rounded-full p-3 text-gray-500 text-sm hover:bg-gray-200"
+          >
+            <FaBars />
+          </button>
+          <div className="flex flex-col text-base gap-1 items-start font-bold">
+            <p>Dashboard</p>
           </div>
-          {isCollapsible && (
-            <button
-              className={collapseIconClasses}
-              onClick={handleSidebarToggle}
-            >
-              <CollapsIcon />
-            </button>
-          )}
         </div>
 
-        <div className="flex flex-col items-start mt-24">
-          {menuItems.map(({ icon: Icon, ...menu }, index) => {
-            const classes = getNavItemClasses(menu);
-            return (
-              <div className={classes} key={index}>
-                <Link href={menu.link}>
-                  <a className="flex py-4 px-3 items-center w-full h-full">
-                    <div style={{ width: "2.5rem" }}>
-                      [--]
-                    </div>
-                    {!toggleCollapse && (
-                      <span
-                        className={classNames(
-                          "text-md font-medium text-text-light"
-                        )}
-                      >
-                        {menu.label}
-                      </span>
-                    )}
-                  </a>
-                </Link>
-              </div>
-            );
-          })}
+        <div className="text-[#337AB7] mx-8 font-bold text-md hidden md:inline">
+          🌎Referrals Hub
+        </div>
+
+        <div className="text-center px-5 py-1 rounded-md cursor-pointer hover:bg-gray-100 flex flex-col justify-center items-center">
+          <FaSignOutAlt />
+          <p className="text-sm font-medium">Logout</p>
         </div>
       </div>
 
-      <div className={`${getNavItemClasses({})} px-3 py-4`}>
-        <div style={{ width: "2.5rem" }}>
-          ---
+
+      <div className="w-full">
+        <div
+          className={
+            sidebar
+              ? "fixed grid row-span-2 left-[-100%] lg:left-0 top-0 pt-24  w-60 z-10 border-0 h-full drop-shadow-2xl bg-blue-50 ease-in-out duration-500"
+              : "fixed grid row-span-2 left-0 lg:left-[-100%] top-0 pt-24 w-60 z-10 border-0 h-full drop-shadow-2xl bg-blue-50 ease-in-out duration-500"
+          }
+        >
+          <ul className="space-y-8">
+            {routeLinks.map((routeItem, index) => {
+              return (
+                <li key={index}>
+                  <Link
+                    key={index}
+                    href={routeItem.to}
+                    className={`flex gap-4 px-4 items-center font-medium text-[0.94rem] whitespace-nowrap ${activeLink === routeItem.to
+                      ? "border-blue-400 border-x-[3px] text-[#212832]"
+                      : "text-[#212832] font-normal"
+                      }`}
+                  >
+                    {React.cloneElement(routeItem.icon, {
+                      color:
+                        activeLink === routeItem.to ? "#337AB7" : "#69707a",
+                      size: 20,
+                    })}
+                    <span>{routeItem.display}</span>
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
         </div>
-        {!toggleCollapse && (
-          <span className={classNames("text-md font-medium text-text-light")}>
-            Logout
-          </span>
-        )}
+        <div
+          className={
+            sidebar
+              ? "h-full w-full lg:pl-[17rem] static overflow-y-hidden px-8 py-[80px] bg-blue-50 ease-in-out duration-500"
+              : "h-full w-full static overflow-visible px-8 py-[80px] bg-blue-50 ease-in-out duration-500"
+          }
+        >
+          {children}
+        </div>
       </div>
-    </div>
+    </Fragment>
   );
 };
 
-export default Sidebar;
+export default Navbar;
