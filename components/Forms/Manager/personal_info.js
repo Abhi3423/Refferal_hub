@@ -8,12 +8,7 @@ import { useRouter } from "next/router";
 
 const Personal_info = () => {
   const user = useContext(AuthContext);
-  const {setCurrentUserDetails} = useContext(AuthContext);
-  const router = useRouter();
-
-  useEffect(() => {
-    console.log(user?.currentUserDetails);
-  }, [user?.currentUserDetails]);
+  const { setFullDetails, fullDetails } = useContext(AuthContext);
 
   const formik = useFormik({
     initialValues: {
@@ -29,32 +24,9 @@ const Personal_info = () => {
       state: Yup.string().required("* State is required"),
     }),
     onSubmit: async (values) => {
-      
-      setCurrentUserDetails({
-        ...user.currentUserDetails,
-        personal: values
-      });
-      console.log(user.currentUserDetails)
-
-      // try {
-      //   const { name, email, ...restCurrentUserDetails } = user?.currentUserDetails[0];
-
-      //   const res = await fetch("/api/data/create_refferar", {
-      //     method: "POST",
-      //     headers: {
-      //       "Content-Type": "application/json",
-      //     },
-      //     body: JSON.stringify({ ...values, name, email, ...restCurrentUserDetails }),
-      //   });
-
-      //   console.log(res);
-      // } catch (error) {
-      //   console.error(error);
-      // }
-
+      setFullDetails({ ...fullDetails, personal: values });
       if (user?.step < 3) {
         user?.setstep((prevStep) => prevStep + 1);
-        console.log(user?.step);
       }
     },
   });

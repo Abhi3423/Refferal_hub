@@ -16,8 +16,9 @@ const provider = new GoogleAuthProvider();
 export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState("");
   const [currentUserDetails, setCurrentUserDetails] = useState({});
+  const [fullDetails, setFullDetails] = useState({});
   const [step, setstep] = useState(1);
-  let [admindata, setadmindata] = useState([])
+  let [admindata, setadmindata] = useState([]);
 
   function Signup(email, password) {
     return createUserWithEmailAndPassword(auth, email, password);
@@ -35,7 +36,7 @@ export function AuthProvider({ children }) {
         email: details?.user?.email,
         photo: details?.user?.photoURL,
       });
-      setadmindata(currentUserDetails)
+      setadmindata(currentUserDetails);
       res = true;
     } catch (error) {
       res = false;
@@ -51,7 +52,6 @@ export function AuthProvider({ children }) {
   }
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
-      console.log(user);
       setCurrentUser(user);
       return unsubscribe;
     }, []);
@@ -59,7 +59,6 @@ export function AuthProvider({ children }) {
   useEffect(() => {
     const fetch = async () => {
       if (currentUser) {
-        console.log(currentUser);
         setCurrentUserDetails({
           name: currentUser?.displayName,
           email: currentUser?.email,
@@ -84,6 +83,8 @@ export function AuthProvider({ children }) {
     setstep,
     admindata,
     setadmindata,
+    fullDetails,
+    setFullDetails,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
