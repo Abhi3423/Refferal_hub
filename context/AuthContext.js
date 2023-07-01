@@ -16,6 +16,7 @@ const provider = new GoogleAuthProvider();
 export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState("");
   const [currentUserDetails, setCurrentUserDetails] = useState({});
+  const [step,setstep] = useState(3)
 
   function Signup(email, password) {
     return createUserWithEmailAndPassword(auth, email, password);
@@ -72,6 +73,8 @@ export function AuthProvider({ children }) {
     login,
     SignOut,
     ForgotPassword,
+    step,
+    setstep,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

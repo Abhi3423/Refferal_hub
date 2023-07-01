@@ -2,27 +2,28 @@ import React from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
-const Personal_info = () => {
+const Company_info = () => {
 
     const formik = useFormik({
         initialValues: {
-            gender: "",
-            phoneNumber: "",
-            country: "",
-            state: "",
+            currentOrg: "",
+            location: "",
+            position: "",
+            servedMonths: undefined,
         },
         validationSchema: Yup.object().shape({
-            name: Yup.string().required("* Name is required"),
-            email: Yup.string().email("* Invalid email").required("* Email is required"),
-            gender: Yup.string().required("* Gender is required"),
-            phoneNumber: Yup.string().required("* Phone number is required"),
-            country: Yup.string().required("* Country is required"),
-            state: Yup.string().required("* State is required"),
+            currentOrg: Yup.string().required("* Current company is required"),
+            location: Yup.string().required("* Location is required"),
+            position: Yup.string().required("* Position is required"),
+            servedMonths: Yup.number()
+                .required("* Served months is required")
+                .min(1, "Minimum 1 month of service required"),
         }),
         onSubmit: (values) => {
             console.log(values);
         },
     });
+
 
 
 
@@ -39,18 +40,18 @@ const Personal_info = () => {
 
             <div className="flex justify-center items-center w-full">
                 <div className="font-normal text-sm grid grid-cols-2 gap-x-40 items-center">
-                    <label htmlFor="gender">Gender </label>
+                    <label htmlFor="org">Current Organisation </label>
                     <input
                         className="w-fit px-4 py-2 border-solid border-[1.5px] border-[#E5E5E5] rounded-md font-semibold"
                         type="text"
-                        name="gender"
-                        value={formik.values.gender}
+                        name="currentOrg"
+                        value={formik.values.currentOrg}
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
                     />
-                    {formik.touched.gender && formik.errors.gender ? (
+                    {formik.touched.currentOrg && formik.errors.currentOrg ? (
                         <div className="text-red-500 text-xs col-start-2 mt-1">
-                            {formik.errors.gender}
+                            {formik.errors.currentOrg}
                         </div>
                     ) : (
                         <div className="text-red-500 text-xs col-start-2 mt-1 w-full h-4"></div>
@@ -60,60 +61,60 @@ const Personal_info = () => {
 
             <div className="flex justify-center items-center w-full">
                 <div className="font-normal text-sm grid grid-cols-2 gap-x-40 items-center">
-                    <label htmlFor="phone">Phone number </label>
+                    <label htmlFor="location">Location </label>
+                    <input
+                        className="w-fit px-4 py-2 border-solid border-[1.5px] border-[#E5E5E5] rounded-md font-semibold"
+                        type="text"
+                        name="location"
+                        value={formik.values.location}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                    />
+                    {formik.touched.location && formik.errors.location ? (
+                        <div className="text-red-500 text-xs col-start-2 mt-1">
+                            {formik.errors.location}
+                        </div>
+                    ) : (
+                        <div className="text-red-500 text-xs col-start-2 mt-1 w-full h-4"></div>
+                    )}
+                </div>
+            </div>
+
+            <div className="flex justify-center items-center w-full">
+                <div className="font-normal text-sm grid grid-cols-2 gap-x-40 items-center">
+                    <label htmlFor="pos">Position </label>
+                    <input
+                        className="w-fit px-4 py-2 border-solid border-[1.5px] border-[#E5E5E5] rounded-md font-semibold"
+                        type="text"
+                        name="position"
+                        value={formik.values.position}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                    />
+                    {formik.touched.position && formik.errors.position ? (
+                        <div className="text-red-500 text-xs col-start-2 mt-1">
+                            {formik.errors.position}
+                        </div>
+                    ) : (
+                        <div className="text-red-500 text-xs col-start-2 mt-1 w-full h-4"></div>
+                    )}
+                </div>
+            </div>
+
+            <div className="flex justify-center items-center w-full">
+                <div className="font-normal text-sm grid grid-cols-2 gap-x-40 items-center">
+                    <label htmlFor="served">Served Months </label>
                     <input
                         className="w-fit px-4 py-2 border-solid border-[1.5px] border-[#E5E5E5] rounded-md font-semibold"
                         type="number"
-                        name="phoneNumber"
-                        value={formik.values.phoneNumber}
+                        name="servedMonths"
+                        value={formik.values.servedMonths}
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
                     />
-                    {formik.touched.phoneNumber && formik.errors.phoneNumber ? (
+                    {formik.touched.servedMonths && formik.errors.servedMonths ? (
                         <div className="text-red-500 text-xs col-start-2 mt-1">
-                            {formik.errors.phoneNumber}
-                        </div>
-                    ) : (
-                        <div className="text-red-500 text-xs col-start-2 mt-1 w-full h-4"></div>
-                    )}
-                </div>
-            </div>
-
-            <div className="flex justify-center items-center w-full">
-                <div className="font-normal text-sm grid grid-cols-2 gap-x-40 items-center">
-                    <label htmlFor="country">Country </label>
-                    <input
-                        className="w-fit px-4 py-2 border-solid border-[1.5px] border-[#E5E5E5] rounded-md font-semibold"
-                        type="text"
-                        name="country"
-                        value={formik.values.country}
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
-                    />
-                    {formik.touched.country && formik.errors.country ? (
-                        <div className="text-red-500 text-xs col-start-2 mt-1">
-                            {formik.errors.country}
-                        </div>
-                    ) : (
-                        <div className="text-red-500 text-xs col-start-2 mt-1 w-full h-4"></div>
-                    )}
-                </div>
-            </div>
-
-            <div className="flex justify-center items-center w-full">
-                <div className="font-normal text-sm grid grid-cols-2 gap-x-40 items-center">
-                    <label htmlFor="state">State </label>
-                    <input
-                        className="w-fit px-4 py-2 border-solid border-[1.5px] border-[#E5E5E5] rounded-md font-semibold"
-                        type="text"
-                        name="state"
-                        value={formik.values.state}
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
-                    />
-                    {formik.touched.state && formik.errors.state ? (
-                        <div className="text-red-500 text-xs col-start-2 mt-1">
-                            {formik.errors.state}
+                            {formik.errors.servedMonths}
                         </div>
                     ) : (
                         <div className="text-red-500 text-xs col-start-2 mt-1 w-full h-4"></div>
@@ -133,4 +134,4 @@ const Personal_info = () => {
     );
 }
 
-export default Personal_info;
+export default Company_info;
