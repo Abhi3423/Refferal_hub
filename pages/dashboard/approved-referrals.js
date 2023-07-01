@@ -1,8 +1,10 @@
-import React ,{useState,useEffect}from 'react'
+import React ,{useState,useEffect,useContext}from 'react'
 import Layout from '@/components/manager_shared/layout'
+import { AuthContext } from '@/context/AuthContext';
 
 function approved_referrals() {
-
+  const useAuth = useContext(AuthContext);
+  const [email, setEmail] = useState("");
   const [user, setUser] = React.useState([])
   async function getUser() {
     //post request paasing email
@@ -11,7 +13,7 @@ function approved_referrals() {
        headers: {
          "Content-Type": "application/json",
        },
-       body: JSON.stringify({ email: "tushar@gmail.com" }),
+       body: JSON.stringify({ email: email }),
      });
      const data = await res.json();
     const temp=data.data.referal_accepted;
@@ -19,8 +21,16 @@ function approved_referrals() {
     setUser(temp);
    }
    useEffect(() => {
-     getUser();
-   }, []);
+    if(email){
+      console.log(email);
+      getUser();
+    } 
+    }, [email]);
+  
+    useEffect(() => {
+      setEmail(useAuth.currentUser.email);
+    }, [useAuth.currentUser.email]);
+    // console.log(email);
 
   return (
     <Layout>
@@ -42,9 +52,9 @@ function approved_referrals() {
                     </thead>
                    
                     <tbody>
-                    {user.map((item,key)=>{
+                    {user.map((item,index)=>{
                         return <tr className="border-b dark:border-gray-700 " key={index}>
-                        <td className="px-4 py-3">{key+1}</td>
+                        <td className="px-4 py-3">{index+1}</td>
                             <th scope="row" className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">{item.name}</th>
                             <td className="px-4 py-3">{item.userEmail}</td>
                             <td className="px-4 py-3">{item.resumeScore}</td>
