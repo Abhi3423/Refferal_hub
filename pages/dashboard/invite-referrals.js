@@ -1,6 +1,6 @@
-import React, { useContext, useState, useEffect } from 'react'
-import Layout from '@/components/manager_shared/layout'
-import { AuthContext } from '@/context/AuthContext'
+import React, { useContext, useState, useEffect } from "react";
+import Layout from "@/components/manager_shared/layout";
+import { AuthContext } from "@/context/AuthContext";
 
 function Invite_referrals() {
   const [user, setUser] = useState([]);
@@ -14,18 +14,18 @@ function Invite_referrals() {
       body: JSON.stringify({ email: "tushar@gmail.com" }),
     });
     const data = await res.json();
-    const temp = data.data.referal_request;
+    const temp = data?.data?.referal_request;
     //sort temp array in descending order of resume score
-    temp.sort((a, b) => b.resumeScore - a.resumeScore);
+    temp?.sort((a, b) => b.resumeScore - a.resumeScore);
     setUser(temp);
   }
   useEffect(() => {
     getUser();
   }, []);
-  console.log(user)
+  console.log(user);
   return (
     <Layout>
-      <div className='w-full bg-white rounded-lg p-4'>
+      <div className="w-full bg-white rounded-lg p-4">
         <section className="bg-gray-50 dark:bg-gray-900 p-3 sm:p-5">
           <div className="mx-auto max-w-screen-xl px-4 lg:px-12">
             <div className="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
@@ -36,33 +36,49 @@ function Invite_referrals() {
                 <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                   <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
-                      <th scope="col" className="px-4 py-3">User name</th>
-                      <th scope="col" className="px-4 py-3">User Email</th>
-                      <th scope="col" className="px-4 py-3">Resume Score</th>
+                      <th scope="col" className="px-4 py-3">
+                        User name
+                      </th>
+                      <th scope="col" className="px-4 py-3">
+                        User Email
+                      </th>
+                      <th scope="col" className="px-4 py-3">
+                        Resume Score
+                      </th>
                       <th scope="col" className="px-4 py-3"></th>
                     </tr>
                   </thead>
 
                   <tbody>
-                    {user.map((item, index) => {
-                      return <tr className="border-b dark:border-gray-700 " key={index}>
-
-                        <th scope="row" className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">{item.name}</th>
-                        <td className="px-4 py-3">{item.userEmail}</td>
-                        <td className="px-4 py-3">{item.resumeScore}</td>
-                        <td className="px-4 py-3"><button className='cursor-pointer p-2 rounded-md bg-blue-500 text-white'>View Resume --{'>'}</button></td>
-                      </tr>
+                    {user?.map((item, index) => {
+                      return (
+                        <tr
+                          className="border-b dark:border-gray-700 "
+                          key={index}>
+                          <th
+                            scope="row"
+                            className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            {item.name}
+                          </th>
+                          <td className="px-4 py-3">{item.userEmail}</td>
+                          <td className="px-4 py-3">{item.resumeScore}</td>
+                          <td className="px-4 py-3">
+                            <button className="cursor-pointer p-2 rounded-md bg-blue-500 text-white">
+                              View Resume --{">"}
+                            </button>
+                          </td>
+                        </tr>
+                      );
                     })}
                   </tbody>
                 </table>
               </div>
-
             </div>
           </div>
         </section>
       </div>
     </Layout>
-  )
+  );
 }
 
-export default Invite_referrals
+export default Invite_referrals;

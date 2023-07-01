@@ -21,7 +21,7 @@ function Create_referral() {
     )
       alert("Please fill all the fields");
     try {
-      const res = await fetch("/api/referral", {
+      const res = await fetch("/api/data/create_referal", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -33,7 +33,7 @@ function Create_referral() {
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.message);
-      router.push("/dashboard");
+      router.push("/dashboard/profile");
     } catch (err) {
       console.log(err.message);
     }
