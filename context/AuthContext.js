@@ -41,8 +41,8 @@ export function AuthProvider({ children }) {
     }
     return res;
   };
-  function SignOut() {
-    return signOut(auth);
+  async function SignOut() {
+    return await signOut(auth);
   }
   function ForgotPassword(email) {
     return sendPasswordResetEmail(auth, email);
