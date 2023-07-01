@@ -23,8 +23,9 @@ export default function Home() {
   const handelSignUp = async (e) => {
     e.preventDefault();
     try {
-      await currentUser.SignInWithGooglePopUp();
-      router.push("/dashboard");
+      const res = await currentUser?.SignInWithGooglePopUp();
+      if (res) router.push("/dashboard");
+      else console.log("PopUp Failed");
     } catch (error) {
       console.log(error.message);
     }
