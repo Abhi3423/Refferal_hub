@@ -46,7 +46,6 @@ const Personal_info = () => {
     });
 
 
-
     return (
         <form className="flex flex-col gap-4 mt-4" onSubmit={formik.handleSubmit}>
 
