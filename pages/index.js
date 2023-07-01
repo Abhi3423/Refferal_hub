@@ -1,117 +1,199 @@
 import Image from 'next/image'
 import { Inter } from 'next/font/google'
+import Link from 'next/link'
+import intercom from './../public/assets/intercom.png'
+import buffer from './../public/assets/buffer.png'
+import airbnb from './../public/assets/airbnb.png'
+import coming_soon from './../public/assets/coming_soon.png'
+import online_shopping from './../public/assets/online_shopping.png'
+import order_complete from './../public/assets/order_complete.png'
+import placeholder from './../public/assets/placeholder.png'
+import product_hunt from './../public/assets/product_hunt.png'
+import product_shot from './../public/assets/product_shot.png'
+import slack from './../public/assets/slack.png'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
   return (
     <main
-      className={`flex min-h-screen flex-col items-center justify-between p-24 ${inter.className}`}
+      className={`flex min-h-screen p-2 flex-col ${inter.className}`}
     >
-      <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">pages/index.js</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+      <div>
+        <div className="flex flex-row items-center justify-between p-4 shadow-lg">
+          <div className="column align-left">
+            <a href="#" aria-current="page" className="w-inline-block w--current">
+              <div className="logo"><span className="emoji mr-md">🌎</span> Lander</div>
+            </a>
+          </div>
+          <div className="flex gap-4 items-center">
+            <Link href="#" className="text-blue-700 font-bold hover:underline-offset-2">Log in</Link>
+            <Link href="/dashboard" className="rounded-md py-2 px-4 bg-blue-700 text-white text-base shadow-lg">Sign in<span
+              data-feather="arrow-right" className="icon mr-md-n ml-md">•</span></Link>
+          </div>
         </div>
-      </div>
-
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700/10 after:dark:from-sky-900 after:dark:via-[#0141ff]/40 before:lg:h-[360px]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className="mb-32 grid text-center lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Discover and deploy boilerplate example Next.js&nbsp;projects.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
+        <div className="section overflow-hidden">
+          <div className="container mt-3xl mb-3xl">
+            <div className="row">
+              <div className="column align-center">
+                <h1 className="test-giga text-center">Unlock the power of referrals with Referral Hub.</h1>
+                <p className="text-lg text-center max-w-lg">Find the best candidates for your job openings and give referrals in your company with ease. Referral Hub uses AI-generated scores to help you make informed decisions.</p>
+                <a href="#" className="button xl main mt-lg w-button">Sign up now</a>
+                <div className="text-sm mt-md muted">
+                  14 day free trial • No credit card required
+                </div>
+                <div className="text-sm mt-2xl text-center">
+                  Show credibility with social proof. Logos of press coverage or
+                  biggest customers
+                </div>
+                <div className="
+                row
+                items-center
+                mt-lg
+                _w-full
+                max-w-lg
+                wrap
+                justify-center
+              ">
+                  <div className="logo-container">
+                    <Image width={40} height={40} src={intercom} alt="intercom logo" className="intercom" />
+                  </div>
+                  <div className="logo-container">
+                    <Image width={40} height={40} src={buffer} alt="" className="buffer" />
+                  </div>
+                  <div className="logo-container ph">
+                    <Image width={40} height={40} src={product_hunt} alt="" className="product-hunt" />
+                  </div>
+                  <div className="logo-container">
+                    <Image width={40} height={40} src={slack} alt="" className="slack" />
+                  </div>
+                  <div className="logo-container">
+                    <Image width={40} height={40} src={airbnb} alt="" className="airbnb" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="circle"></div>
+        </div>
+        <div className="section">
+          <Image width={40} height={40} src={product_shot} srcSet="
+        http://api.writesonic.com/static/images/product-shot-p-500.png  500w,
+        http://api.writesonic.com/static/images/product-shot-p-800.png 800w,
+        http://api.writesonic.com/static/images/product-shot-p-1080.png 1080w,
+        http://api.writesonic.com/static/images/product-shot.png 1521w
+      " sizes="(max-width: 479px) 93vw, (max-width: 767px) 94vw, 720px"
+            data-w-id="a4177896-a5e5-6c6a-0980-01ce8ea2054a" style={{ opacity: 0 }} alt="" className="product-shot" />
+        </div>
+        <div className="section">
+          <div className="container mt-2xl mb-2xl">
+            <div className="row">
+              <div className="column align-center">
+                <h2 className="max-w-lg text-center">Unlock the power of referrals for your hiring process.</h2>
+                <p className="text-lg text-center max-w-md">
+                  Streamline your candidate selection process with Referral Hub. Access a pool of resumes and let AI generate scores to identify the best candidates for your job openings. Choose who to refer and boost your company's hiring success.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="section">
+          <div className="container">
+            <div className="row items-center v-t">
+              <div className="column align-left p-2xl">
+                <h6 className="max-w-lg">#1 Feature</h6>
+                <h2 className="max-w-lg">Bring your company to life with captivating landing page designs.</h2>
+                <p className="text-lg">Make a lasting impression with stunning landing page designs that bring your company to life. Our animations and AI-generated images will captivate your audience and leave a lasting impact. Stand out from the competition and attract top talent with our visually appealing landing pages.</p>
+              </div>
+              <div className="column align-center p-2xl">
+                <Image width={40} height={40} src={coming_soon} alt="" className="feature-card" />
+              </div>
+            </div>
+            <div className="row reverse items-center v-t">
+              <div className="column align-left p-2xl">
+                <h6 className="max-w-lg">#2 Feature</h6>
+                <h2 className="max-w-lg">Find the perfect candidate effortlessly.</h2>
+                <p className="text-lg">Say goodbye to endless searching and screening. With Referral Hub's intuitive UI/UX and stunning glassmorphism effects, finding the ideal candidate for your job opening has never been easier. Say hello to effortless hiring and start building your dream team today.</p>
+              </div>
+              <div className="column align-center p-2xl">
+                <Image width={40} height={40} src={online_shopping} alt="" className="feature-card" />
+              </div>
+            </div>
+            <div className="row items-center v-t">
+              <div className="column align-left p-2xl">
+                <h6 className="max-w-lg">#3 Feature</h6>
+                <h2 className="max-w-lg">Unlock the power of referrals with ease.</h2>
+                <p className="text-lg">Simplify the referral process with Referral Hub's easy-to-use login buttons for referral managers and candidates. Find the best candidates for job openings and streamline the referral process in your company. Unlock the power of referrals and boost your hiring success.</p>
+              </div>
+              <div className="column align-center p-2xl">
+                <Image width={40} height={40} src={order_complete} alt="" className="feature-card" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="section main mt-2xl">
+          <div className="container mt-2xl mb-2xl">
+            <div className="row items-center">
+              <div className="column align-center">
+                <h1 className="max-w-lg text-giga text-center text-white">Make smarter hiring decisions with Referral Hub.</h1>
+                <a href="#" className="button xl main white mt-lg w-button">Sign up now</a>
+                <div className="faded text-sm mt-md">
+                  14 day free trial • No credit card required
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="section pb-2xl-m">
+          <div className="container mt-2xl mb-2xl">
+            <div className="row v-l">
+              <div className="column align-left">
+                <div className="emoji lg">🌎</div>
+                <a href="#" className="u mt-lg">info@email.com</a>
+                <div className="row mt-lg ml-md-n">
+                  <a href="#" target="_blank" className="p-md w-inline-block"><Image
+                    width={40} height={40} src={placeholder}
+                    data-feather="twitter" alt="" className="icon" /></a>
+                  <a href="#" target="_blank" className="p-md w-inline-block"><Image
+                    width={40} height={40} src={placeholder}
+                    data-feather="instagram" alt="" className="icon" /></a>
+                  <a href="#" target="_blank" className="p-md w-inline-block"><Image
+                    width={40} height={40} src={placeholder}
+                    data-feather="linkedin" alt="" className="icon" /></a>
+                </div>
+              </div>
+              <div className="column align-left">
+                <h6 className="max-w-lg mb-xl footer-header">Company</h6>
+                <div>About</div>
+                <div className="mt-md">Customers</div>
+                <div className="mt-md">Jobs</div>
+                <div className="mt-md">Blog</div>
+              </div>
+              <div className="column align-left">
+                <h6 className="max-w-lg mb-xl footer-header">Contact</h6>
+                <div>Support</div>
+                <div className="mt-md">Sales</div>
+              </div>
+              <div className="column align-left">
+                <h6 className="max-w-lg mb-xl footer-header">Resources</h6>
+                <div>Podcast</div>
+                <div className="mt-md">Help Center</div>
+              </div>
+            </div>
+            <div className="border-t mt-xl">
+              <div className="row mt-xl v-l">
+                <div className="column align-left">
+                  <div className="muted text-sm">
+                    © No copyright I guess? Do whatever you want with the site
+                  </div>
+                </div>
+                <div className="column align-right">
+                  <div className="text-sm muted">Built with ❤️ in React</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </main>
   )
