@@ -1,15 +1,44 @@
 import React from "react";
 import { useState, useEffect, useContext } from "react";
 import { AuthContext } from "@/context/AuthContext";
-
 import Image from "next/image";
 import { useRouter } from "next/router";
-import Link from "next/link";
 import Layout from "@/components/manager_shared/layout";
 
 function Create_referral() {
-  const router = useRouter();
   const user = useContext(AuthContext);
+  const [refForm, setRefForm] = useState({});
+  const router = useRouter();
+
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    if (
+      !refForm?.position ||
+      !refForm?.city ||
+      !refForm?.company_name ||
+      !refForm?.min_experience ||
+      !refForm?.job_description
+    )
+      alert("Please fill all the fields");
+    try {
+      const res = await fetch("/api/referral", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          refForm,
+          email: user?.currentUserDetails?.email,
+        }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.message);
+      router.push("/dashboard");
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
+
   return (
     <Layout>
       <div class="bg-white rounded shadow-lg p-4 px-4 md:p-8 mb-6">
@@ -40,9 +69,12 @@ function Create_referral() {
                   type="text"
                   name="address"
                   id="address"
-                  class="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
-                  value=""
+                  class="h-10 border mt-1 rounded px-4 w-full bg-gray-50 "
+                  value={refForm?.position}
                   placeholder=""
+                  onChange={(e) =>
+                    setRefForm({ ...refForm, position: e.target.value })
+                  }
                 />
               </div>
 
@@ -53,8 +85,11 @@ function Create_referral() {
                   name="city"
                   id="city"
                   class="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
-                  value=""
+                  value={refForm?.city}
                   placeholder=""
+                  onChange={(e) =>
+                    setRefForm({ ...refForm, city: e.target.value })
+                  }
                 />
               </div>
               <div class="md:col-span-3">
@@ -64,20 +99,26 @@ function Create_referral() {
                   name="address"
                   id="address"
                   class="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
-                  value=""
+                  value={refForm?.company_name}
                   placeholder=""
+                  onChange={(e) =>
+                    setRefForm({ ...refForm, company_name: e.target.value })
+                  }
                 />
               </div>
 
               <div class="md:col-span-2">
                 <label for="city">Minimum Experience (yr)</label>
                 <input
-                  type="text"
-                  name="city"
-                  id="city"
+                  type="number"
+                  name="minExp"
+                  id="minExp"
                   class="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
-                  value=""
+                  value={refForm?.min_experience}
                   placeholder=""
+                  onChange={(e) =>
+                    setRefForm({ ...refForm, min_experience: e.target.value })
+                  }
                 />
               </div>
               <div class="md:col-span-5">
@@ -85,13 +126,22 @@ function Create_referral() {
                 <textarea
                   name="job_description"
                   id="job_description"
+                  value={refForm?.job_description}
                   class="h-40 appearance-none border mt-1 rounded px-4 w-full bg-gray-50"
-                  placeholder=""></textarea>
+                  placeholder=""
+                  onChange={(e) =>
+                    setRefForm({ ...refForm, job_description: e.target.value })
+                  }
+                />
               </div>
 
               <div class="md:col-span-5 text-right">
                 <div class="inline-flex items-end">
-                  <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                  <button
+                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                    onClick={(e) => {
+                      onSubmit(e);
+                    }}>
                     Submit
                   </button>
                 </div>
