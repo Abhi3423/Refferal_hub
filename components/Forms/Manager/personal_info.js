@@ -45,13 +45,13 @@ const Personal_info = () => {
       className="flex flex-col gap-4 mt-4"
       onSubmit={(e) => formik.handleSubmit(e)}>
       <div className="w-full flex gap-5 justify-center items-center">
-        <div className="w-28 h-28 rounded-full bg-purple-600 object-fill">
-          {/* <Image
-            className="w-10 h-10 rounded-full"
-            src={user?.currentUserDetails?.photo}
-            alt="user"
-          /> */}
-        </div>
+        <Image
+          className="rounded-full"
+          width={90}
+          height={90}
+          src={user?.currentUserDetails?.photo}
+          alt="user"
+        />
         <div className="flex flex-col gap-2">
           <div>{user?.currentUserDetails?.name}</div>
           <div>{user?.currentUserDetails?.email}</div>
