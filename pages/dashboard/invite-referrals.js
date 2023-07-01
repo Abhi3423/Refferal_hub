@@ -44,8 +44,8 @@ function Invite_referrals() {
                   </thead>
 
                   <tbody>
-                    {user.map((item) => {
-                      return <tr className="border-b dark:border-gray-700 ">
+                    {user.map((item, index) => {
+                      return <tr className="border-b dark:border-gray-700 " key={index}>
 
                         <th scope="row" className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">{item.name}</th>
                         <td className="px-4 py-3">{item.userEmail}</td>
