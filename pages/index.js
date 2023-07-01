@@ -1,7 +1,6 @@
 import Image from 'next/image'
 import { Inter } from 'next/font/google'
 import Link from 'next/link'
-import intercom from './../public/assets/intercom.png'
 import buffer from './../public/assets/buffer.png'
 import airbnb from './../public/assets/airbnb.png'
 import coming_soon from './../public/assets/coming_soon.png'
@@ -26,7 +25,7 @@ export default function Home() {
             <div className="row items-center mb-lg">
               <div className="column align-left">
                 <a href="#" aria-current="page" className="w-inline-block w--current">
-                  <div className="logo"><span className="emoji mr-md">🌎</span> Lander</div>
+                  <div className="logo"><span className="emoji mr-md">🌎</span> Refferals</div>
                 </a>
               </div>
               <div className="column align-right">
@@ -46,7 +45,7 @@ export default function Home() {
               <div className="column align-center">
                 <h1 className="test-giga text-center">Unlock the power of referrals with Referral Hub.</h1>
                 <p className="text-lg text-center max-w-lg">Find the best candidates for your job openings and give referrals in your company with ease. Referral Hub uses AI-generated scores to help you make informed decisions.</p>
-                <a href="#" className="button xl main mt-lg w-button">Sign up now</a>
+                <Link href="/dashboard" className="button xl main mt-lg w-button">Sign up now</Link>
                 <div className="text-sm mt-md muted">
                   14 day free trial • No credit card required
                 </div>
@@ -83,13 +82,7 @@ export default function Home() {
         </div>
 
         <div className="section">
-          <Image width={40} height={40} src={product_shot} srcSet="
-        http://api.writesonic.com/static/images/product-shot-p-500.png  500w,
-        http://api.writesonic.com/static/images/product-shot-p-800.png 800w,
-        http://api.writesonic.com/static/images/product-shot-p-1080.png 1080w,
-        http://api.writesonic.com/static/images/product-shot.png 1521w
-      " sizes="(max-width: 479px) 93vw, (max-width: 767px) 94vw, 720px"
-            data-w-id="a4177896-a5e5-6c6a-0980-01ce8ea2054a" style={{ opacity: 0 }} alt="" className="product-shot" />
+          <Image src={product_shot} alt="" className="product-shot shadow-lg" />
         </div>
 
         <div className="section">
@@ -145,7 +138,7 @@ export default function Home() {
             <div className="row items-center">
               <div className="column align-center">
                 <h1 className="max-w-lg text-giga text-center text-white">Make smarter hiring decisions with Referral Hub.</h1>
-                <a href="#" className="button xl main white mt-lg w-button">Sign up now</a>
+                <Link href="/dashboard" className="button xl main white mt-lg w-button">Sign up now</Link>
                 <div className="faded text-sm mt-md">
                   14 day free trial • No credit card required
                 </div>
