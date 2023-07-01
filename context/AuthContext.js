@@ -16,6 +16,7 @@ const provider = new GoogleAuthProvider();
 export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState("");
   const [currentUserDetails, setCurrentUserDetails] = useState({});
+  const [step,setstep] = useState(3)
 
   function Signup(email, password) {
     return createUserWithEmailAndPassword(auth, email, password);
@@ -24,7 +25,7 @@ export function AuthProvider({ children }) {
     return signInWithEmailAndPassword(auth, email, password);
   }
 
-  const SignInWithGooglePopUp = async () => {
+  const SignInWithGooglePopUp = async (res) => {
     try {
       const details = await signInWithPopup(auth, provider);
       setCurrentUser(details?.user?.email);
@@ -33,8 +34,10 @@ export function AuthProvider({ children }) {
         email: details?.user?.email,
         photo: details?.user?.photoURL,
       });
+      res = true;
     } catch (error) {
-      console.log(error.messsage);
+      res = false;
+      console.log(error.message);
     }
   };
   function SignOut() {
@@ -70,6 +73,8 @@ export function AuthProvider({ children }) {
     login,
     SignOut,
     ForgotPassword,
+    step,
+    setstep,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

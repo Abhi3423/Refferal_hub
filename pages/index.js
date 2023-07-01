@@ -1,6 +1,5 @@
 import Image from "next/image";
 import { useEffect, useContext } from "react";
-import { useNavigate } from "react-router-dom";
 import { Inter } from "next/font/google";
 import Link from "next/link";
 import intercom from "./../public/assets/intercom.png";
@@ -24,8 +23,9 @@ export default function Home() {
   const handelSignUp = async (e) => {
     e.preventDefault();
     try {
-      await currentUser.SignInWithGooglePopUp();
-      router.push("/dashboard");
+      const res = await currentUser?.SignInWithGooglePopUp();
+      if (res) router.push("/dashboard");
+      else console.log("PopUp Failed");
     } catch (error) {
       console.log(error.message);
     }
@@ -136,7 +136,10 @@ export default function Home() {
                   Unlock the power of referrals for your hiring process.
                 </h2>
                 <p className="text-lg text-center max-w-md">
-                  Streamline your candidate selection process with Referral Hub. Access a pool of resumes and let AI generate scores to identify the best candidates for your job openings. Choose who to refer and boost your companys hiring success.
+                  Streamline your candidate selection process with Referral Hub.
+                  Access a pool of resumes and let AI generate scores to
+                  identify the best candidates for your job openings. Choose who
+                  to refer and boost your companys hiring success.
                 </p>
               </div>
             </div>
@@ -167,8 +170,16 @@ export default function Home() {
             <div className="row reverse items-center v-t">
               <div className="column align-left p-2xl">
                 <h6 className="max-w-lg">#2 Feature</h6>
-                <h2 className="max-w-lg">Find the perfect candidate effortlessly.</h2>
-                <p className="text-lg">Say goodbye to endless searching and screening. With Referral Hubs intuitive UI/UX and stunning glassmorphism effects, finding the ideal candidate for your job opening has never been easier. Say hello to effortless hiring and start building your dream team today.</p>
+                <h2 className="max-w-lg">
+                  Find the perfect candidate effortlessly.
+                </h2>
+                <p className="text-lg">
+                  Say goodbye to endless searching and screening. With Referral
+                  Hubs intuitive UI/UX and stunning glassmorphism effects,
+                  finding the ideal candidate for your job opening has never
+                  been easier. Say hello to effortless hiring and start building
+                  your dream team today.
+                </p>
               </div>
               <div className="column align-center p-2xl">
                 <Image src={online_shopping} alt="" className="feature-card" />
@@ -177,8 +188,16 @@ export default function Home() {
             <div className="row items-center v-t">
               <div className="column align-left p-2xl">
                 <h6 className="max-w-lg">#3 Feature</h6>
-                <h2 className="max-w-lg">Unlock the power of referrals with ease.</h2>
-                <p className="text-lg">Simplify the referral process with Referral Hubs easy-to-use login buttons for referral managers and candidates. Find the best candidates for job openings and streamline the referral process in your company. Unlock the power of referrals and boost your hiring success.</p>
+                <h2 className="max-w-lg">
+                  Unlock the power of referrals with ease.
+                </h2>
+                <p className="text-lg">
+                  Simplify the referral process with Referral Hubs easy-to-use
+                  login buttons for referral managers and candidates. Find the
+                  best candidates for job openings and streamline the referral
+                  process in your company. Unlock the power of referrals and
+                  boost your hiring success.
+                </p>
               </div>
               <div className="column align-center p-2xl">
                 <Image src={order_complete} alt="" className="feature-card" />
