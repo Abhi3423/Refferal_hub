@@ -49,21 +49,24 @@ export function AuthProvider({ children }) {
   }
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
+      console.log(user);
       setCurrentUser(user);
       return unsubscribe;
     }, []);
   });
-  // useEffect(() => {
-  //   const fetch = async () => {
-  //     if (currentUser) {
-  //       console.log(currentUser);
-  //       await getUser(currentUser.email).then((data) => {
-  //         setCurrentUserDetails(data);
-  //       });
-  //     }
-  //   };
-  //   fetch();
-  // }, [currentUser]);
+  useEffect(() => {
+    const fetch = async () => {
+      if (currentUser) {
+        console.log(currentUser);
+        setCurrentUserDetails({
+          name: currentUser?.displayName,
+          email: currentUser?.email,
+          photo: currentUser?.photoURL,
+        });
+      }
+    };
+    fetch();
+  }, [currentUser]);
 
   const value = {
     currentUser,
