@@ -3,6 +3,9 @@ import Layout from "@/components/manager_shared/layout";
 import { AuthContext } from "@/context/AuthContext";
 
 function Invite_referrals() {
+  const useAuth = useContext(AuthContext);
+  const [email, setEmail] = useState("");
+
   const [user, setUser] = useState([]);
   async function getUser() {
     //post request paasing email
@@ -11,7 +14,7 @@ function Invite_referrals() {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ email: "tushar@gmail.com" }),
+      body: JSON.stringify({ email: email }),
     });
     const data = await res.json();
     const temp = data?.data?.referal_request;
@@ -20,9 +23,16 @@ function Invite_referrals() {
     setUser(temp);
   }
   useEffect(() => {
-    getUser();
-  }, []);
-  console.log(user);
+    if (email) {
+      console.log(email);
+      getUser();
+    }
+  }, [email]);
+
+  useEffect(() => {
+    setEmail(useAuth.currentUser.email);
+  }, [useAuth.currentUser.email]);
+  // console.log(email);
   return (
     <Layout>
       <div className="w-full bg-white rounded-lg p-4">
@@ -36,6 +46,9 @@ function Invite_referrals() {
                 <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                   <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
+                      <th scope="col" className="px-4 py-3">
+                        Sr. No.
+                      </th>
                       <th scope="col" className="px-4 py-3">
                         User name
                       </th>
@@ -55,12 +68,13 @@ function Invite_referrals() {
                         <tr
                           className="border-b dark:border-gray-700 "
                           key={index}>
+                          <td className="px-4 py-3">{index + 1}</td>
                           <th
                             scope="row"
                             className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                             {item.name}
                           </th>
-                          <td className="px-4 py-3">{item.userEmail}</td>
+                          <td className="px-4 py -3">{item.userEmail}</td>
                           <td className="px-4 py-3">{item.resumeScore}</td>
                           <td className="px-4 py-3">
                             <button className="cursor-pointer p-2 rounded-md bg-blue-500 text-white">
