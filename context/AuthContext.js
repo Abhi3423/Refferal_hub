@@ -39,6 +39,7 @@ export function AuthProvider({ children }) {
       res = false;
       console.log(error.message);
     }
+    return res;
   };
   function SignOut() {
     return signOut(auth);

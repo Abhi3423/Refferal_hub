@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import Image from "next/image";
 import { useContext } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -9,6 +10,10 @@ const Personal_info = () => {
   const user = useContext(AuthContext);
   const router = useRouter();
 
+  useEffect(() => {
+    console.log(user?.currentUserDetails);
+  }, [user?.currentUserDetails]);
+
   const formik = useFormik({
     initialValues: {
       gender: "",
@@ -17,34 +22,39 @@ const Personal_info = () => {
       state: "",
     },
     validationSchema: Yup.object().shape({
-      name: Yup.string().required("* Name is required"),
-      email: Yup.string()
-        .email("* Invalid email")
-        .required("* Email is required"),
+      //   name: Yup.string().required("* Name is required"),
+      //   email: Yup.string()
+      //     .email("* Invalid email")
+      //     .required("* Email is required"),
       gender: Yup.string().required("* Gender is required"),
       phoneNumber: Yup.string().required("* Phone number is required"),
       country: Yup.string().required("* Country is required"),
       state: Yup.string().required("* State is required"),
     }),
-    onSubmit: () => {
+    onSubmit: (e) => {
       console.log("clicked");
       if (user?.step < 3) {
         user?.setstep((e) => e + 1);
         console.log(user?.step);
-      } else {
-        setstep(1);
-        router.push("/");
       }
     },
   });
 
   return (
-    <form className="flex flex-col gap-4 mt-4" onSubmit={formik.handleSubmit}>
+    <form
+      className="flex flex-col gap-4 mt-4"
+      onSubmit={(e) => formik.handleSubmit(e)}>
       <div className="w-full flex gap-5 justify-center items-center">
-        <div className="w-28 h-28 rounded-full bg-purple-600"></div>
+        <div className="w-28 h-28 rounded-full bg-purple-600 object-fill">
+          {/* <Image
+            className="w-10 h-10 rounded-full"
+            src={user?.currentUserDetails?.photo}
+            alt="user"
+          /> */}
+        </div>
         <div className="flex flex-col gap-2">
-          <div>NAME</div>
-          <div>EMAIL@gmail.com</div>
+          <div>{user?.currentUserDetails?.name}</div>
+          <div>{user?.currentUserDetails?.email}</div>
         </div>
       </div>
 
@@ -64,7 +74,7 @@ const Personal_info = () => {
               {formik.errors.gender}
             </div>
           ) : (
-            <div className="text-red-500 text-xs col-start-2 mt-1 w-full h-4"></div>
+            <div className="text-red-500 text-xs col-start-2 mt-1 w-full h-4" />
           )}
         </div>
       </div>
@@ -136,8 +146,7 @@ const Personal_info = () => {
         <button
           className="bg-green-500 w-fit py-2 px-4 rounded-lg text-white"
           type="submit"
-          value="submit"
-          onClick={formik.handleSubmit}>
+          value="submit">
           Next
         </button>
       </div>
