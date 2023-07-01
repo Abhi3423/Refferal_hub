@@ -1,137 +1,148 @@
-import React from "react";
+import React, { useContext, useState, useEffect } from "react";
+import Image from "next/image";
+import { AuthContext } from "@/context/AuthContext";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
 const Company_info = () => {
+  const user = useContext(AuthContext);
+  console.log(user);
+  useEffect(() => {
+    console.log(user?.currentUserDetails);
+  }, [user?.currentUserDetails]);
 
-    const formik = useFormik({
-        initialValues: {
-            currentOrg: "",
-            location: "",
-            position: "",
-            servedMonths: undefined,
-        },
-        validationSchema: Yup.object().shape({
-            currentOrg: Yup.string().required("* Current company is required"),
-            location: Yup.string().required("* Location is required"),
-            position: Yup.string().required("* Position is required"),
-            servedMonths: Yup.number()
-                .required("* Served months is required")
-                .min(1, "Minimum 1 month of service required"),
-        }),
-        onSubmit: (values) => {
-            console.log(values);
-        },
-    });
+  const formik = useFormik({
+    initialValues: {
+      currentOrg: "",
+      location: "",
+      position: "",
+      servedMonths: undefined,
+    },
+    validationSchema: Yup.object().shape({
+      currentOrg: Yup.string().required("* Current company is required"),
+      location: Yup.string().required("* Location is required"),
+      position: Yup.string().required("* Position is required"),
+      servedMonths: Yup.number()
+        .required("* Served months is required")
+        .min(1, "Minimum 1 month of service required"),
+    }),
+    onSubmit: (values) => {
+      if (user?.step < 3) user?.setstep((e) => e + 1);
+      console.log(values);
+    },
+  });
 
+  return (
+    <form className="flex flex-col gap-4 mt-4" onSubmit={formik.handleSubmit}>
+      <div className="w-full flex gap-5 justify-center items-center">
+        <div className="w-28 h-28 rounded-full bg-purple-600">
+          {/* <Image
+            width={80}
+            className="w-10 h-10 rounded-full"
+            src={user?.currentUserDetails?.photo}
+            alt="user"
+          /> */}
+        </div>
+        <div className="flex flex-col gap-2">
+          <div>{user?.currentUserDetails?.name}</div>
+          <div>{user?.currentUserDetails?.email}</div>
+        </div>
+      </div>
 
-
-
-    return (
-        <form className="flex flex-col gap-4 mt-4" onSubmit={formik.handleSubmit}>
-
-            <div className="w-full flex gap-5 justify-center items-center">
-                <div className="w-28 h-28 rounded-full bg-purple-600"></div>
-                <div className="flex flex-col gap-2">
-                    <div>NAME</div>
-                    <div>EMAIL@gmail.com</div>
-                </div>
+      <div className="flex justify-center items-center w-full">
+        <div className="font-normal text-sm grid grid-cols-2 gap-x-40 items-center">
+          <label htmlFor="org">Current Organisation </label>
+          <input
+            className="w-fit px-4 py-2 border-solid border-[1.5px] border-[#E5E5E5] rounded-md font-semibold"
+            type="text"
+            name="currentOrg"
+            value={formik.values.currentOrg}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+          />
+          {formik.touched.currentOrg && formik.errors.currentOrg ? (
+            <div className="text-red-500 text-xs col-start-2 mt-1">
+              {formik.errors.currentOrg}
             </div>
+          ) : (
+            <div className="text-red-500 text-xs col-start-2 mt-1 w-full h-4"></div>
+          )}
+        </div>
+      </div>
 
-            <div className="flex justify-center items-center w-full">
-                <div className="font-normal text-sm grid grid-cols-2 gap-x-40 items-center">
-                    <label htmlFor="org">Current Organisation </label>
-                    <input
-                        className="w-fit px-4 py-2 border-solid border-[1.5px] border-[#E5E5E5] rounded-md font-semibold"
-                        type="text"
-                        name="currentOrg"
-                        value={formik.values.currentOrg}
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
-                    />
-                    {formik.touched.currentOrg && formik.errors.currentOrg ? (
-                        <div className="text-red-500 text-xs col-start-2 mt-1">
-                            {formik.errors.currentOrg}
-                        </div>
-                    ) : (
-                        <div className="text-red-500 text-xs col-start-2 mt-1 w-full h-4"></div>
-                    )}
-                </div>
+      <div className="flex justify-center items-center w-full">
+        <div className="font-normal text-sm grid grid-cols-2 gap-x-40 items-center">
+          <label htmlFor="location">Location </label>
+          <input
+            className="w-fit px-4 py-2 border-solid border-[1.5px] border-[#E5E5E5] rounded-md font-semibold"
+            type="text"
+            name="location"
+            value={formik.values.location}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+          />
+          {formik.touched.location && formik.errors.location ? (
+            <div className="text-red-500 text-xs col-start-2 mt-1">
+              {formik.errors.location}
             </div>
+          ) : (
+            <div className="text-red-500 text-xs col-start-2 mt-1 w-full h-4"></div>
+          )}
+        </div>
+      </div>
 
-            <div className="flex justify-center items-center w-full">
-                <div className="font-normal text-sm grid grid-cols-2 gap-x-40 items-center">
-                    <label htmlFor="location">Location </label>
-                    <input
-                        className="w-fit px-4 py-2 border-solid border-[1.5px] border-[#E5E5E5] rounded-md font-semibold"
-                        type="text"
-                        name="location"
-                        value={formik.values.location}
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
-                    />
-                    {formik.touched.location && formik.errors.location ? (
-                        <div className="text-red-500 text-xs col-start-2 mt-1">
-                            {formik.errors.location}
-                        </div>
-                    ) : (
-                        <div className="text-red-500 text-xs col-start-2 mt-1 w-full h-4"></div>
-                    )}
-                </div>
+      <div className="flex justify-center items-center w-full">
+        <div className="font-normal text-sm grid grid-cols-2 gap-x-40 items-center">
+          <label htmlFor="pos">Position </label>
+          <input
+            className="w-fit px-4 py-2 border-solid border-[1.5px] border-[#E5E5E5] rounded-md font-semibold"
+            type="text"
+            name="position"
+            value={formik.values.position}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+          />
+          {formik.touched.position && formik.errors.position ? (
+            <div className="text-red-500 text-xs col-start-2 mt-1">
+              {formik.errors.position}
             </div>
+          ) : (
+            <div className="text-red-500 text-xs col-start-2 mt-1 w-full h-4"></div>
+          )}
+        </div>
+      </div>
 
-            <div className="flex justify-center items-center w-full">
-                <div className="font-normal text-sm grid grid-cols-2 gap-x-40 items-center">
-                    <label htmlFor="pos">Position </label>
-                    <input
-                        className="w-fit px-4 py-2 border-solid border-[1.5px] border-[#E5E5E5] rounded-md font-semibold"
-                        type="text"
-                        name="position"
-                        value={formik.values.position}
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
-                    />
-                    {formik.touched.position && formik.errors.position ? (
-                        <div className="text-red-500 text-xs col-start-2 mt-1">
-                            {formik.errors.position}
-                        </div>
-                    ) : (
-                        <div className="text-red-500 text-xs col-start-2 mt-1 w-full h-4"></div>
-                    )}
-                </div>
+      <div className="flex justify-center items-center w-full">
+        <div className="font-normal text-sm grid grid-cols-2 gap-x-40 items-center">
+          <label htmlFor="served">Served Months </label>
+          <input
+            className="w-fit px-4 py-2 border-solid border-[1.5px] border-[#E5E5E5] rounded-md font-semibold"
+            type="number"
+            name="servedMonths"
+            value={formik.values.servedMonths}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+          />
+          {formik.touched.servedMonths && formik.errors.servedMonths ? (
+            <div className="text-red-500 text-xs col-start-2 mt-1">
+              {formik.errors.servedMonths}
             </div>
+          ) : (
+            <div className="text-red-500 text-xs col-start-2 mt-1 w-full h-4"></div>
+          )}
+        </div>
+      </div>
 
-            <div className="flex justify-center items-center w-full">
-                <div className="font-normal text-sm grid grid-cols-2 gap-x-40 items-center">
-                    <label htmlFor="served">Served Months </label>
-                    <input
-                        className="w-fit px-4 py-2 border-solid border-[1.5px] border-[#E5E5E5] rounded-md font-semibold"
-                        type="number"
-                        name="servedMonths"
-                        value={formik.values.servedMonths}
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
-                    />
-                    {formik.touched.servedMonths && formik.errors.servedMonths ? (
-                        <div className="text-red-500 text-xs col-start-2 mt-1">
-                            {formik.errors.servedMonths}
-                        </div>
-                    ) : (
-                        <div className="text-red-500 text-xs col-start-2 mt-1 w-full h-4"></div>
-                    )}
-                </div>
-            </div>
-
-
-            <div className="flex justify-center items-center w-full">
-                <button className="bg-green-500 w-fit py-2 px-4 rounded-lg text-white" type="submit" value="submit">
-                    Next
-                </button>
-            </div>
-
-
-        </form>
-    );
-}
+      <div className="flex justify-center items-center w-full">
+        <button
+          className="bg-green-500 w-fit py-2 px-4 rounded-lg text-white"
+          type="submit"
+          value="submit">
+          Next
+        </button>
+      </div>
+    </form>
+  );
+};
 
 export default Company_info;
