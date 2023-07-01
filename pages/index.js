@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import { useEffect } from 'react';
 import { Inter } from 'next/font/google'
 import Link from 'next/link'
 import intercom from './../public/assets/intercom.png'
@@ -15,6 +16,8 @@ import slack from './../public/assets/slack.png'
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
+  
+
   return (
     <main
       className={`flex min-h-screen flex-col ${inter.className}`}
