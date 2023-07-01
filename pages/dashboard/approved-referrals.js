@@ -2,7 +2,7 @@ import React ,{useState,useEffect,useContext}from 'react'
 import Layout from '@/components/manager_shared/layout'
 import { AuthContext } from '@/context/AuthContext';
 
-function approved_referrals() {
+function Approved_referrals() {
   const useAuth = useContext(AuthContext);
   const [email, setEmail] = useState("");
   const [user, setUser] = React.useState([])
@@ -72,4 +72,4 @@ function approved_referrals() {
   )
 }
 
-export default approved_referrals
+export default Approved_referrals
