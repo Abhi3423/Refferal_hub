@@ -17,21 +17,29 @@ const inter = Inter({ subsets: ['latin'] })
 export default function Home() {
   return (
     <main
-      className={`flex min-h-screen p-2 flex-col ${inter.className}`}
+      className={`flex min-h-screen flex-col ${inter.className}`}
     >
       <div>
-        <div className="flex flex-row items-center justify-between p-4 shadow-lg">
-          <div className="column align-left">
-            <a href="#" aria-current="page" className="w-inline-block w--current">
-              <div className="logo"><span className="emoji mr-md">🌎</span> Lander</div>
-            </a>
+
+        <header className="nav">
+          <div className="container">
+            <div className="row items-center mb-lg">
+              <div className="column align-left">
+                <a href="#" aria-current="page" className="w-inline-block w--current">
+                  <div className="logo"><span className="emoji mr-md">🌎</span> Lander</div>
+                </a>
+              </div>
+              <div className="column align-right">
+                <div className="row items-center">
+                  <Link href="#" className="u mr-lg">Log in</Link>
+                  <Link href="/dashboard" className="button main w-button">Sign in<span
+                    data-feather="arrow-right" className="icon mr-md-n ml-md">•</span></Link>
+                </div>
+              </div>
+            </div>
           </div>
-          <div className="flex gap-4 items-center">
-            <Link href="#" className="text-blue-700 font-bold hover:underline-offset-2">Log in</Link>
-            <Link href="/dashboard" className="rounded-md py-2 px-4 bg-blue-700 text-white text-base shadow-lg">Sign in<span
-              data-feather="arrow-right" className="icon mr-md-n ml-md">•</span></Link>
-          </div>
-        </div>
+        </header>
+
         <div className="section overflow-hidden">
           <div className="container mt-3xl mb-3xl">
             <div className="row">
@@ -56,9 +64,6 @@ export default function Home() {
                 justify-center
               ">
                   <div className="logo-container">
-                    <Image width={40} height={40} src={intercom} alt="intercom logo" className="intercom" />
-                  </div>
-                  <div className="logo-container">
                     <Image width={40} height={40} src={buffer} alt="" className="buffer" />
                   </div>
                   <div className="logo-container ph">
@@ -76,6 +81,7 @@ export default function Home() {
           </div>
           <div className="circle"></div>
         </div>
+
         <div className="section">
           <Image width={40} height={40} src={product_shot} srcSet="
         http://api.writesonic.com/static/images/product-shot-p-500.png  500w,
@@ -85,6 +91,7 @@ export default function Home() {
       " sizes="(max-width: 479px) 93vw, (max-width: 767px) 94vw, 720px"
             data-w-id="a4177896-a5e5-6c6a-0980-01ce8ea2054a" style={{ opacity: 0 }} alt="" className="product-shot" />
         </div>
+
         <div className="section">
           <div className="container mt-2xl mb-2xl">
             <div className="row">
@@ -97,6 +104,7 @@ export default function Home() {
             </div>
           </div>
         </div>
+
         <div className="section">
           <div className="container">
             <div className="row items-center v-t">
@@ -131,6 +139,7 @@ export default function Home() {
             </div>
           </div>
         </div>
+
         <div className="section main mt-2xl">
           <div className="container mt-2xl mb-2xl">
             <div className="row items-center">
@@ -144,6 +153,7 @@ export default function Home() {
             </div>
           </div>
         </div>
+
         <div className="section pb-2xl-m">
           <div className="container mt-2xl mb-2xl">
             <div className="row v-l">
@@ -184,16 +194,17 @@ export default function Home() {
               <div className="row mt-xl v-l">
                 <div className="column align-left">
                   <div className="muted text-sm">
-                    © No copyright I guess? Do whatever you want with the site
+                    ©copyright2023
                   </div>
                 </div>
                 <div className="column align-right">
-                  <div className="text-sm muted">Built with ❤️ in React</div>
+                  <div className="text-sm muted">Built with ❤️ in Nextv12</div>
                 </div>
               </div>
             </div>
           </div>
         </div>
+
       </div>
     </main>
   )
