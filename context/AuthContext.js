@@ -24,7 +24,7 @@ export function AuthProvider({ children }) {
     return signInWithEmailAndPassword(auth, email, password);
   }
 
-  const SignInWithGooglePopUp = async () => {
+  const SignInWithGooglePopUp = async (res) => {
     try {
       const details = await signInWithPopup(auth, provider);
       setCurrentUser(details?.user?.email);
@@ -33,8 +33,10 @@ export function AuthProvider({ children }) {
         email: details?.user?.email,
         photo: details?.user?.photoURL,
       });
+      res = true;
     } catch (error) {
-      console.log(error.messsage);
+      res = false;
+      console.log(error.message);
     }
   };
   function SignOut() {
