@@ -8,12 +8,13 @@ const Confirmation = () => {
   const user = React.useContext(AuthContext);
   const router = useRouter();
   useEffect(() => {
+    
     setTimeout(() => {
       router.push("/dashboard/profile");
-    }, 500);
+    }, 500000);
     setTimeout(() => {
       user?.setstep(1);
-    }, 1000);
+    }, 500000);
   }, []);
   return (
     <div>

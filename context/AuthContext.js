@@ -17,6 +17,7 @@ export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState("");
   const [currentUserDetails, setCurrentUserDetails] = useState({});
   const [step, setstep] = useState(1);
+  let [admindata, setadmindata] = useState([])
 
   function Signup(email, password) {
     return createUserWithEmailAndPassword(auth, email, password);
@@ -34,6 +35,7 @@ export function AuthProvider({ children }) {
         email: details?.user?.email,
         photo: details?.user?.photoURL,
       });
+      setadmindata(currentUserDetails)
       res = true;
     } catch (error) {
       res = false;
@@ -71,6 +73,7 @@ export function AuthProvider({ children }) {
   const value = {
     currentUser,
     currentUserDetails,
+    setCurrentUserDetails,
     setCurrentUser,
     Signup,
     SignInWithGooglePopUp,
@@ -79,6 +82,8 @@ export function AuthProvider({ children }) {
     ForgotPassword,
     step,
     setstep,
+    admindata,
+    setadmindata,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

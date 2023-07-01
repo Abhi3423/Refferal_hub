@@ -3,9 +3,12 @@ import Image from "next/image";
 import { AuthContext } from "@/context/AuthContext";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { useRouter } from "next/router";
 
 const Company_info = () => {
   const user = useContext(AuthContext);
+  const { setCurrentUserDetails } = useContext(AuthContext);
+
   console.log(user);
   useEffect(() => {
     console.log(user?.currentUserDetails);
@@ -26,7 +29,30 @@ const Company_info = () => {
         .required("* Served months is required")
         .min(1, "Minimum 1 month of service required"),
     }),
-    onSubmit: (values) => {
+    onSubmit: async (values) => {
+      setCurrentUserDetails({
+        ...user.currentUserDetails,
+        company: values
+      });
+      console.log(user.currentUserDetails)
+
+      try {
+
+        const res = await fetch("/api/data/create_hirer", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(user.currentUserDetails),
+        });
+
+        console.log(res);
+
+      } catch (error) {
+        console.error(error);
+      }
+
+
       if (user?.step < 3) user?.setstep((e) => e + 1);
       console.log(values);
     },
@@ -35,14 +61,13 @@ const Company_info = () => {
   return (
     <form className="flex flex-col gap-4 mt-4" onSubmit={formik.handleSubmit}>
       <div className="w-full flex gap-5 justify-center items-center">
-        <div className="w-28 h-28 rounded-full bg-purple-600">
-          {/* <Image
-            width={80}
-            className="w-10 h-10 rounded-full"
-            src={user?.currentUserDetails?.photo}
-            alt="user"
-          /> */}
-        </div>
+        <Image
+          className="rounded-full"
+          width={90}
+          height={90}
+          src={user?.currentUserDetails?.photo}
+          alt="user"
+        />
         <div className="flex flex-col gap-2">
           <div>{user?.currentUserDetails?.name}</div>
           <div>{user?.currentUserDetails?.email}</div>

@@ -8,6 +8,7 @@ import { useRouter } from "next/router";
 
 const Personal_info = () => {
   const user = useContext(AuthContext);
+  const {setCurrentUserDetails} = useContext(AuthContext);
   const router = useRouter();
 
   useEffect(() => {
@@ -22,19 +23,37 @@ const Personal_info = () => {
       state: "",
     },
     validationSchema: Yup.object().shape({
-      //   name: Yup.string().required("* Name is required"),
-      //   email: Yup.string()
-      //     .email("* Invalid email")
-      //     .required("* Email is required"),
       gender: Yup.string().required("* Gender is required"),
       phoneNumber: Yup.string().required("* Phone number is required"),
       country: Yup.string().required("* Country is required"),
       state: Yup.string().required("* State is required"),
     }),
-    onSubmit: (e) => {
-      console.log("clicked");
+    onSubmit: async (values) => {
+      
+      setCurrentUserDetails({
+        ...user.currentUserDetails,
+        personal: values
+      });
+      console.log(user.currentUserDetails)
+
+      // try {
+      //   const { name, email, ...restCurrentUserDetails } = user?.currentUserDetails[0];
+
+      //   const res = await fetch("/api/data/create_refferar", {
+      //     method: "POST",
+      //     headers: {
+      //       "Content-Type": "application/json",
+      //     },
+      //     body: JSON.stringify({ ...values, name, email, ...restCurrentUserDetails }),
+      //   });
+
+      //   console.log(res);
+      // } catch (error) {
+      //   console.error(error);
+      // }
+
       if (user?.step < 3) {
-        user?.setstep((e) => e + 1);
+        user?.setstep((prevStep) => prevStep + 1);
         console.log(user?.step);
       }
     },
