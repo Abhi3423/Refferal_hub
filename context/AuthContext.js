@@ -16,7 +16,7 @@ const provider = new GoogleAuthProvider();
 export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState("");
   const [currentUserDetails, setCurrentUserDetails] = useState({});
-  const [step,setstep] = useState(3)
+  const [step, setstep] = useState(1);
 
   function Signup(email, password) {
     return createUserWithEmailAndPassword(auth, email, password);
