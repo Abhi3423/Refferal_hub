@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import { Inter } from 'next/font/google'
 import Link from 'next/link'
+import intercom from './../public/assets/intercom.png'
 import buffer from './../public/assets/buffer.png'
 import airbnb from './../public/assets/airbnb.png'
 import coming_soon from './../public/assets/coming_soon.png'
@@ -63,16 +64,19 @@ export default function Home() {
                 justify-center
               ">
                   <div className="logo-container">
-                    <Image width={40} height={40} src={buffer} alt="" className="buffer" />
+                    <Image src={intercom} alt="" className="buffer" />
+                  </div>
+                  <div className="logo-container">
+                    <Image src={buffer} alt="" className="buffer" />
                   </div>
                   <div className="logo-container ph">
-                    <Image width={40} height={40} src={product_hunt} alt="" className="product-hunt" />
+                    <Image src={product_hunt} alt="" className="product-hunt" />
                   </div>
                   <div className="logo-container">
-                    <Image width={40} height={40} src={slack} alt="" className="slack" />
+                    <Image src={slack} alt="" className="slack" />
                   </div>
                   <div className="logo-container">
-                    <Image width={40} height={40} src={airbnb} alt="" className="airbnb" />
+                    <Image src={airbnb} alt="" className="airbnb" />
                   </div>
                 </div>
               </div>
@@ -107,7 +111,7 @@ export default function Home() {
                 <p className="text-lg">Make a lasting impression with stunning landing page designs that bring your company to life. Our animations and AI-generated images will captivate your audience and leave a lasting impact. Stand out from the competition and attract top talent with our visually appealing landing pages.</p>
               </div>
               <div className="column align-center p-2xl">
-                <Image width={40} height={40} src={coming_soon} alt="" className="feature-card" />
+                <Image src={coming_soon} alt="" className="feature-card" />
               </div>
             </div>
             <div className="row reverse items-center v-t">
@@ -117,7 +121,7 @@ export default function Home() {
                 <p className="text-lg">Say goodbye to endless searching and screening. With Referral Hub's intuitive UI/UX and stunning glassmorphism effects, finding the ideal candidate for your job opening has never been easier. Say hello to effortless hiring and start building your dream team today.</p>
               </div>
               <div className="column align-center p-2xl">
-                <Image width={40} height={40} src={online_shopping} alt="" className="feature-card" />
+                <Image src={online_shopping} alt="" className="feature-card" />
               </div>
             </div>
             <div className="row items-center v-t">
@@ -127,7 +131,7 @@ export default function Home() {
                 <p className="text-lg">Simplify the referral process with Referral Hub's easy-to-use login buttons for referral managers and candidates. Find the best candidates for job openings and streamline the referral process in your company. Unlock the power of referrals and boost your hiring success.</p>
               </div>
               <div className="column align-center p-2xl">
-                <Image width={40} height={40} src={order_complete} alt="" className="feature-card" />
+                <Image src={order_complete} alt="" className="feature-card" />
               </div>
             </div>
           </div>
