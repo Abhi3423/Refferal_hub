@@ -54,12 +54,10 @@ const Resume_info = () => {
     form.append("providers", "affinda");
     form.append("file", resume);
     const url = "https://api.edenai.run/v2/ocr/resume_parser";
-    const apiKey =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNzM4NjU2NWYtZWFjYS00MmJlLTk1NDItZDRjODIyYzNmODY1IiwidHlwZSI6ImFwaV90b2tlbiJ9.E3idlR05Fq_vrZsYRdyKEcirb_CN4JjxRQ-64SKYF0M";
     const options = {
       method: "POST",
       headers: {
-        Authorization: `Bearer ${apiKey}`,
+        Authorization: `Bearer ${process.env.NEXT_PUBLIC_PARSER_APIKEY}`,
       },
       body: form,
     };

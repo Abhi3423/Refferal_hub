@@ -53,7 +53,7 @@ const Navbar = ({ children }) => {
 
   return (
     <Fragment>
-      <div className="fixed w-full flex justify-between items-center bg-blue-50 z-30 drop-shadow py-2.5 px-2">
+      <div className="dark:text-black fixed w-full flex justify-between items-center bg-blue-50 z-30 drop-shadow py-2.5 px-2">
         <div className="flex gap-2 items-center order-first">
           <button
             onClick={handleClick}
