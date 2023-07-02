@@ -10,7 +10,7 @@ export default async function createUser(req, res) {
     const querySnapshot = await getDocs(q);
     if (querySnapshot.empty) {
       const docRef = await addDoc(user, {
-        data,
+        ...data,
       });
       res
         .status(200)

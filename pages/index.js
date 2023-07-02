@@ -22,17 +22,18 @@ export default function Home() {
   const router = useRouter();
 
   const allDetailsFilled = async () => {
-    const data = await fetch("/api/user", {
+    const res = await fetch("/api/user/getuser", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        email: currentUser?.currentUserDetails?.email,
+        email: await currentUser?.currentUser,
       }),
     });
-
-    if (data?.data && data?.data?.name) return true;
+    const data = await res.json();
+    console.log(data);
+    if (data.data.id) return true;
     return false;
   };
 
