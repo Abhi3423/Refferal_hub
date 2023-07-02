@@ -30,7 +30,7 @@ Overall, the web app for job referral aims to streamline the job search and hiri
 <h4>Material UI</h4>
 
 <h2>Overview :</h2>
-![15](https://github.com/Abhi3423/Refferal_hub/assets/110845672/af819bac-2b1f-430c-b511-c52259f5cffc)
+<img src="https://github.com/Abhi3423/Refferal_hub/assets/110845672/af819bac-2b1f-430c-b511-c52259f5cffc">
 
 
 ## Setting up Project
