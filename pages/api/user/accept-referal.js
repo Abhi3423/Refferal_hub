@@ -29,8 +29,8 @@ export default async function temp(req,res){
           const q1 = query(collection(db, "refferar"), where("email", "==", userEmail));
           const querySnapshot1 = await getDocs(q1);
           const data1={};
-          const docRef1 = querySnapshot.docs[0];
-          querySnapshot.forEach((doc) => {
+          const docRef1 = querySnapshot1.docs[0];
+          querySnapshot1.forEach((doc) => {
               data1.pending_invites=doc.data().pending_invites;
             });
             //find in pending invites with adminEmail as adminEmail and make accepted true
