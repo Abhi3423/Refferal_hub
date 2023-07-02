@@ -8,6 +8,7 @@ export default async function temp(req,res){
         const userEmail=req.body.userEmail;
         const resumeScore=req.body.resumeScore;
         const name=req.body.name;
+        // console.log(req.body);
         const q = query(collection(db, "refferar"), where("email", "==", adminEmail));
         const querySnapshot = await getDocs(q);
         const data={};
