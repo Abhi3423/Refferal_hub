@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { useEffect, useContext } from "react";
+import { useEffect, useContext, useState } from "react";
 import { Inter } from "next/font/google";
 import Link from "next/link";
 import intercom from "./../public/assets/intercom.png";
@@ -54,6 +54,8 @@ export default function Home() {
       router.push("/dashboard/profile");
     }
   };
+
+
   return (
     <main className={`flex min-h-screen flex-col ${inter.className}`}>
       <div>
@@ -341,3 +343,4 @@ export default function Home() {
     </main>
   );
 }
+//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
