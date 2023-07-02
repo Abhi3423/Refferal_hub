@@ -22,38 +22,47 @@ export default function Home() {
   const router = useRouter();
 
   const allDetailsFilled = async () => {
-    const res = await fetch("/api/user/getuser", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email: await currentUser?.currentUser,
-      }),
-    });
-    const data = await res.json();
-    console.log(data);
-    if (data.data.id) return true;
-    return false;
+    if (!currentUser?.currentUser?.email) return;
+    console.log(currentUser?.currentUser?.email);
+    try {
+      const res = await fetch("/api/user/getuser", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: currentUser?.currentUser?.email,
+        }),
+      });
+      const data = await res.json();
+      console.log(data);
+      if (data?.data?.userType === "Hiree") {
+        router.push("/type/dashboard/profile");
+      } else if (data?.data?.userType === "recrute") {
+        router.push("/type/user/profile");
+      } else {
+        router.push("/type");
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
   };
-
   const handelSignUp = async (e) => {
     e.preventDefault();
     if (!currentUser?.currentUser) {
       try {
-        const res = await currentUser?.SignInWithGooglePopUp();
-        if (res) {
-          const isvaild = await allDetailsFilled();
-          if (isvaild) router.push("/dashboard/profile");
-          else router.push("/dashboard");
-        }
+        await currentUser?.SignInWithGooglePopUp();
       } catch (error) {
         console.log(error.message);
       }
     } else {
-      router.push("/dashboard/profile");
+      router.push("/type/dashboard/profile");
     }
   };
+
+  useEffect(() => {
+    allDetailsFilled();
+  }, [currentUser.currentUser]);
 
   return (
     <main className={`flex min-h-screen flex-col ${inter.className}`}>

@@ -35,7 +35,6 @@ export function AuthProvider({ children }) {
         email: details?.user?.email,
         photo: details?.user?.photoURL,
       });
-      setadmindata(currentUserDetails);
       res = true;
     } catch (error) {
       res = false;
@@ -50,7 +49,7 @@ export function AuthProvider({ children }) {
     return sendPasswordResetEmail(auth, email);
   }
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
+    const unsubscribe = auth.onAuthStateChanged(async (user) => {
       setCurrentUser(user);
       return unsubscribe;
     }, []);
