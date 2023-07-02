@@ -42,9 +42,7 @@ async function getUser() {
     }
   }, [useAuth.currentUser]);
   useEffect(() => {
-    
     getData();
-    
   }, []);
   // console.log(data[0]?.refForm.position);
   const [resumeScore, setResumeScore] = useState(-1);

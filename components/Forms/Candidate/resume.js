@@ -12,7 +12,23 @@ const Resume_info = () => {
   const [isLoading, setIsLoading] = useState(false);
   const { setFullDetails, fullDetails } = useContext(AuthContext);
   const [jsonresume, setJsonResume] = useState();
+  const [base64Data, setBase64Data] = useState('');
 
+  const handleFileInputChange = (event) => {
+    formik.setFieldValue("resume", event.target.files[0]);
+      resumeParser(event.target.files[0]);
+    const file = event.target.files[0];
+
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const base64String = reader.result.replace('data:', '').replace(/^.+,/, '');
+        const dataUrl = `data:application/pdf;base64,${base64String}`;
+        setBase64Data(dataUrl);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
   const formik = useFormik({
     initialValues: {
       resume: "",
@@ -30,6 +46,7 @@ const Resume_info = () => {
           body: JSON.stringify({
             userType,
             email: user?.currentUserDetails?.email,
+            resume_url:base64Data,
             name: user?.currentUserDetails?.name,
             photo: user?.currentUserDetails?.photo,
             ...fullDetails,
@@ -103,10 +120,11 @@ const Resume_info = () => {
               // value={formik.values.resume}
               // onChange={formik.handleChange}
               onBlur={formik.handleBlur}
-              onChange={(e) => {
-                formik.setFieldValue("resume", e.target.files[0]);
-                resumeParser(e.target.files[0]);
-              }}
+              // onChange={(e) => {
+              //   formik.setFieldValue("resume", e.target.files[0]);
+              //   resumeParser(e.target.files[0]);
+              // }}
+              onChange={handleFileInputChange}
             />
             {formik.touched.resume && formik.errors.resume ? (
               <div className="text-red-500 text-xs col-start-2 mt-1">
