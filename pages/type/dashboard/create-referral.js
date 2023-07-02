@@ -55,7 +55,7 @@ function Create_referral() {
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.message);
-      router.push("/dashboard/profile");
+      router.push("/type/dashboard/profile");
     } catch (err) {
       console.log(err.message);
     }
