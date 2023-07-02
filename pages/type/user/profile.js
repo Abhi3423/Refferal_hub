@@ -105,7 +105,7 @@ function Profile() {
         <div className="flex gap-3 w-full items-center">
           <span className="block h-[0.5px] w-[4%] bg-slate-400 top-1/2 right-0 transform -translate-y-1/2"></span>
           <span className="text-sm font-semibold whitespace-nowrap">
-            COMPANY DETAILS
+            RESUME DETAILS
           </span>
           <span className="block h-[0.5px] w-[70%] bg-slate-400 top-1/2 left-0 transform -translate-y-1/2">
           
