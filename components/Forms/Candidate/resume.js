@@ -11,7 +11,7 @@ const Resume_info = () => {
   const [userType, setUserType] = useState("recrute");
   const [isLoading, setIsLoading] = useState(false);
   const { setFullDetails, fullDetails } = useContext(AuthContext);
-  const [resume, setResume] = useState();
+  const [jsonresume, setJsonResume] = useState();
 
   const formik = useFormik({
     initialValues: {
@@ -21,7 +21,6 @@ const Resume_info = () => {
       resume: Yup.string().required("* Resume is required"),
     }),
     onSubmit: async (values) => {
-      console.log(values);
       try {
         const res = await fetch("/api/data/create_hirer", {
           method: "POST",
@@ -34,7 +33,7 @@ const Resume_info = () => {
             name: user?.currentUserDetails?.name,
             photo: user?.currentUserDetails?.photo,
             ...fullDetails,
-            resume: values,
+            jsonresume,
           }),
         });
         console.log(res);
@@ -47,13 +46,13 @@ const Resume_info = () => {
   });
 
   //fetch resume parser
-  const resumeParser = async () => {
+  const resumeParser = async (resume) => {
     setIsLoading(true);
     console.log(resume);
     const form = new FormData();
     form.append("providers", "affinda");
     form.append("file", resume);
-    const url = "https://api.edenai.run/v2/ocr/resume_parser";
+    const url = process.env.NEXT_PUBLIC_PARSER_URL;
     const options = {
       method: "POST",
       headers: {
@@ -65,7 +64,7 @@ const Resume_info = () => {
       await fetch(url, options)
         .then((response) => response.json())
         .then((data) => {
-          console.log(data);
+          setJsonResume(data);
         })
         .catch((error) => {
           console.error(error);
@@ -106,8 +105,7 @@ const Resume_info = () => {
               onBlur={formik.handleBlur}
               onChange={(e) => {
                 formik.setFieldValue("resume", e.target.files[0]);
-                setResume(e.target.files[0]);
-                resumeParser();
+                resumeParser(e.target.files[0]);
               }}
             />
             {formik.touched.resume && formik.errors.resume ? (
