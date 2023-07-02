@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import FormData from "form-data";
 import Image from "next/image";
 import { AuthContext } from "@/context/AuthContext";
+import { CircularProgress } from "@mui/material";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useRouter } from "next/router";
@@ -12,17 +13,19 @@ const Resume_info = () => {
   const [isLoading, setIsLoading] = useState(false);
   const { setFullDetails, fullDetails } = useContext(AuthContext);
   const [jsonresume, setJsonResume] = useState();
-  const [base64Data, setBase64Data] = useState('');
+  const [base64Data, setBase64Data] = useState("");
 
   const handleFileInputChange = (event) => {
     formik.setFieldValue("resume", event.target.files[0]);
-      resumeParser(event.target.files[0]);
+    resumeParser(event.target.files[0]);
     const file = event.target.files[0];
 
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
-        const base64String = reader.result.replace('data:', '').replace(/^.+,/, '');
+        const base64String = reader.result
+          .replace("data:", "")
+          .replace(/^.+,/, "");
         const dataUrl = `data:application/pdf;base64,${base64String}`;
         setBase64Data(dataUrl);
       };
@@ -46,7 +49,7 @@ const Resume_info = () => {
           body: JSON.stringify({
             userType,
             email: user?.currentUserDetails?.email,
-            resume_url:base64Data,
+            resume_url: base64Data,
             name: user?.currentUserDetails?.name,
             photo: user?.currentUserDetails?.photo,
             ...fullDetails,
@@ -138,7 +141,10 @@ const Resume_info = () => {
 
         <div className="flex justify-center items-center w-full">
           <button
-            className="bg-green-500 w-fit py-2 px-4 rounded-lg text-white"
+            className={
+              "bg-green-500 w-fit py-2 px-4 rounded-lg text-white" +
+              (isLoading ? " cursor-not-allowed opacity-70" : "")
+            }
             type="submit"
             value="submit"
             disabled={isLoading}>
