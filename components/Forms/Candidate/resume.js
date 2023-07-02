@@ -52,7 +52,7 @@ const Resume_info = () => {
     const form = new FormData();
     form.append("providers", "affinda");
     form.append("file", resume);
-    const url = "https://api.edenai.run/v2/ocr/resume_parser";
+    const url = process.env.NEXT_PUBLIC_PARSER_URL;
     const options = {
       method: "POST",
       headers: {

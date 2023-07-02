@@ -23,7 +23,6 @@ export default function Home() {
 
   const allDetailsFilled = async () => {
     if (!currentUser?.currentUser?.email) return;
-    console.log(currentUser?.currentUser?.email);
     try {
       const res = await fetch("/api/user/getuser", {
         method: "POST",
@@ -35,7 +34,6 @@ export default function Home() {
         }),
       });
       const data = await res.json();
-      console.log(data);
       if (data?.data?.userType === "Hiree") {
         router.push("/type/dashboard/profile");
       } else if (data?.data?.userType === "recrute") {
