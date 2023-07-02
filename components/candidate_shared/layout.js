@@ -4,7 +4,7 @@ import Sidebar from './sidebar'
 const Layout = ({ children }) => {
     return (
         <div>
-            <main className="flex w-full h-screen">
+            <main className="flex w-full">
                 <Sidebar>
                     {children}
                 </Sidebar>
