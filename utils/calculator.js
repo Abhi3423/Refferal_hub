@@ -48,7 +48,7 @@ export function calculateMatchingScore(resume,keywords) {
   let matchingScore = 0;
   for (const keyword of keywordArray) {
     if (resumeText.includes(keyword)) {
-      matchingScore += 1;
+      matchingScore += 5.5366;
     }
   }
   console.log(matchingScore)
