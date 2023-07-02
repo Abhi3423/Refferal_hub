@@ -7,28 +7,28 @@ function Invite_referrals() {
   const [email, setEmail] = useState("");
 
   const [user, setUser] = useState([]);
-//   async function getUser() {
-//     //post request paasing email
-//     const res = await fetch("/api/user/getuser", {
-//       method: "POST",
-//       headers: {
-//         "Content-Type": "application/json",
-//       },
-//       body: JSON.stringify({ email: email }),
-//     });
-//     const data = await res.json();
-//     const temp = data?.data?.referal_request;
+  async function getUser() {
+//     
+    const res = await fetch("/api/user/getuser", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email: email }),
+    });
+    const data = await res.json();
+    const temp = data?.data?.pending_invites;
 //     //sort temp array in descending order of resume score
 //     temp?.sort((a, b) => b.resumeScore - a.resumeScore);
-//     setUser(temp);
-//   }
-//   useEffect(() => {
-//     if (email) {
-//       console.log(email);
-//       getUser();
-//     }
-//   }, [email]);
-
+    setUser(temp);
+  }
+  useEffect(() => {
+    if (email) {
+      console.log(email);
+      getUser();
+    }
+  }, [email]);
+console.log(user);
   useEffect(() => {
     setEmail(useAuth.currentUser.email);
   }, [useAuth.currentUser.email]);
@@ -68,7 +68,7 @@ function Invite_referrals() {
                   </thead>
 
                   <tbody>
-                    {/* {user?.map((item, index) => {
+                    {user?.map((item, index) => {
                       return (
                         <tr
                           className="border-b dark:border-gray-700 "
@@ -77,15 +77,15 @@ function Invite_referrals() {
                           <th
                             scope="row"
                             className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                            {item.name}
+                            {item.recruiterName}
                           </th>
-                          <td className="px-4 py -3">{item.userEmail}</td>
-                          <td className="px-4 py-3">{item.resumeScore}</td>
-                          <td className="px-4 py-3"></td>
-                          <td className="px-4 py-3"></td>
+                          <td className="px-4 py -3">{item?.form?.company_name}</td>
+                          <td className="px-4 py-3">{item?.form?.city}</td>
+                          <td className="px-4 py-3">{item?.form?.position}</td>
+                          <td className="px-4 py-3">{item?.form?.min_experience}</td>
                         </tr>
                       );
-                    })} */}
+                    })}
                   </tbody>
                 </table>
               </div>
