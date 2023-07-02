@@ -8,8 +8,24 @@ function Profile() {
   const user = useContext(AuthContext);
 
   useEffect(() => {
-    // console.log(user?.currentUserDetails);
+    console.log("ok")
+    const fetchData = async () => {
+      try {
+        const res = await fetch("/api/data/create_hirer", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        console.log(res);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchData();
   }, [user?.currentUserDetails]);
+
 
   return (
     <Layout>

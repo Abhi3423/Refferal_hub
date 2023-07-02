@@ -18,7 +18,6 @@ export function AuthProvider({ children }) {
   const [currentUserDetails, setCurrentUserDetails] = useState({});
   const [fullDetails, setFullDetails] = useState({});
   const [step, setstep] = useState(1);
-  let [admindata, setadmindata] = useState([]);
 
   function Signup(email, password) {
     return createUserWithEmailAndPassword(auth, email, password);
@@ -81,8 +80,6 @@ export function AuthProvider({ children }) {
     ForgotPassword,
     step,
     setstep,
-    admindata,
-    setadmindata,
     fullDetails,
     setFullDetails,
   };
