@@ -74,7 +74,7 @@ export default function Home() {
                   aria-current="page"
                   className="w-inline-block w--current">
                   <div className="logo">
-                    <span className="emoji mr-md">🌎</span> Refferals
+                    <span className="emoji mr-md">🌎</span> Referral
                   </div>
                 </a>
               </div>
