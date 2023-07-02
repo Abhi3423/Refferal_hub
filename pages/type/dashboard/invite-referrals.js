@@ -67,8 +67,6 @@ const viewResume=async function(item){
   })
   const res=await data.json();
   setResumeUrl(res?.data?.resume_url);
-  
-
 }
 
   return (
