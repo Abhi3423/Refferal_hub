@@ -39,7 +39,7 @@ export default async function temp(req,res){
         if(pending_invites==undefined){
             pending_invites=[];
         }
-        pending_invites.push({recruiterName:data.adminName,adminEmail:adminEmail,form:formData});
+        pending_invites.push({recruiterName:data.adminName,adminEmail:adminEmail,form:formData,accepted:false});
         await updateDoc(docRef1.ref, {
             pending_invites: pending_invites,
             });

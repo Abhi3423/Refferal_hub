@@ -18,9 +18,13 @@ function Invite_referrals() {
     });
     const data = await res.json();
     const temp = data?.data?.pending_invites;
-//     //sort temp array in descending order of resume score
-//     temp?.sort((a, b) => b.resumeScore - a.resumeScore);
-    setUser(temp);
+    var newdata=[];
+    temp.map((item)=>{
+        if(!item.accepted){
+            newdata.push(item)
+        }
+    })
+    setUser(newdata);
   }
   useEffect(() => {
     if (email) {
