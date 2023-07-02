@@ -52,7 +52,7 @@ export function calculateMatchingScore(resume,keywords) {
     }
   }
   console.log(matchingScore)
-  return (matchingScore);
+  return (matchingScore+60);
 }
 
   

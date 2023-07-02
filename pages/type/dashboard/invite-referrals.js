@@ -3,6 +3,7 @@ import Layout from "@/components/manager_shared/layout";
 import { AuthContext } from "@/context/AuthContext";
 import { FaUnderline } from "react-icons/fa";
 import { useRouter } from "next/router";
+import SuccessModal from "@/utils/successModal";
 
 
 function Invite_referrals() {
@@ -10,6 +11,7 @@ function Invite_referrals() {
   const [email, setEmail] = useState("");
   const router = useRouter();
   const [user, setUser] = useState([]);
+  const [resumeUrl,setResumeUrl]=useState("");
 
   const handleClick= async function(item){
    const data=await fetch("/api/user/accept-referal",{
@@ -54,6 +56,21 @@ function Invite_referrals() {
     setEmail(useAuth.currentUser.email);
   }, [useAuth.currentUser.email]);
   // console.log(email);
+
+const viewResume=async function(item){
+  const data=await fetch("/api/user/getuser",{
+    method:"POST",
+    headers:{
+      "Content-Type":"application/json"
+    },
+    body:JSON.stringify({email:item.userEmail})
+  })
+  const res=await data.json();
+  setResumeUrl(res?.data?.resume_url);
+  
+
+}
+
   return (
     <Layout>
       <div className="w-full bg-white rounded-lg p-4">
@@ -100,7 +117,7 @@ function Invite_referrals() {
                           <td className="px-4 py -3">{item.userEmail}</td>
                           <td className="px-4 py-3">{item.resumeScore}</td>
                           <td className="px-4 py-3">
-                            <button className="cursor-pointer p-2 rounded-md bg-blue-500 text-white">
+                            <button onClick={()=>viewResume(item)} className="cursor-pointer p-2 rounded-md bg-blue-500 text-white">
                               View Resume 
                             </button>
                           </td>

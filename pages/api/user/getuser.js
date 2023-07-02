@@ -24,6 +24,7 @@ export default async function temp(req, res) {
       data.photo = doc.data().photo;
       data.resume = doc.data()?.jsonresume;
       data.userType = doc.data().userType;
+      data.resume_url = doc.data()?.resume_url;
     });
     res.status(200).json({ message: "success", data: data });
   } catch (error) {
