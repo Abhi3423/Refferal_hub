@@ -9,7 +9,7 @@ const Confirmation = () => {
   const router = useRouter();
   useEffect(() => {
     setTimeout(() => {
-      router.push("/type/user/profile");
+      router.push("/user/profile");
     }, 5000);
   }, []);
   return (
