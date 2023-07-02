@@ -22,6 +22,8 @@ By combining these features, the web app for job referral provides a powerful pl
 
 Overall, the web app for job referral aims to streamline the job search and hiring process by leveraging AI, real-time updates, and user-friendly features, ultimately bridging the gap between job seekers and employers in a more effective and efficient manner.
 
+
+
 ## Setting up Project
 
 First, run the development server:
