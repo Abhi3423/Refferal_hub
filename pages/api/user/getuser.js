@@ -4,7 +4,7 @@ import { collection, getDocs, addDoc, where, query } from "firebase/firestore";
 export default async function temp(req, res) {
   try {
     const { email } = await req.body;
-    console.log(email);
+    // console.log(email);
     //find user with email id
     const q = query(collection(db, "refferar"), where("email", "==", email));
     const querySnapshot = await getDocs(q);
@@ -22,6 +22,7 @@ export default async function temp(req, res) {
       data.pending_invites=doc.data()?.pending_invites;
       data.referal_request = doc.data().referal_request;
       data.photo = doc.data().photo;
+      data.resume = doc.data()?.jsonresume;
       data.userType = doc.data().userType;
     });
     res.status(200).json({ message: "success", data: data });
