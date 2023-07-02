@@ -1,12 +1,30 @@
 import React, { useContext, useState, useEffect } from "react";
 import Layout from "@/components/manager_shared/layout";
 import { AuthContext } from "@/context/AuthContext";
+import { FaUnderline } from "react-icons/fa";
 
 function Invite_referrals() {
   const useAuth = useContext(AuthContext);
   const [email, setEmail] = useState("");
 
   const [user, setUser] = useState([]);
+
+  const handleClick= async function(item){
+   const data=await fetch("/api/user/accept-referal",{
+      method:"POST",
+      headers:{
+        "Content-Type":"application/json"
+      },
+      body:JSON.stringify({adminEmail:email,userEmail:item.userEmail,name:item.name})
+    })
+
+    const res=await data.json();
+    if(res.msg=="success"){
+      alert("Referal Accepted");
+    window.location.href="/type/dashboard/approved-referrals";
+    }
+  }
+
   async function getUser() {
     //post request paasing email
     const res = await fetch("/api/user/getuser", {
@@ -58,6 +76,8 @@ function Invite_referrals() {
                       <th scope="col" className="px-4 py-3">
                         Resume Score
                       </th>
+                      <th scope="col" className="px-4 py-3">
+                      </th>
                       <th scope="col" className="px-4 py-3"></th>
                     </tr>
                   </thead>
@@ -78,7 +98,12 @@ function Invite_referrals() {
                           <td className="px-4 py-3">{item.resumeScore}</td>
                           <td className="px-4 py-3">
                             <button className="cursor-pointer p-2 rounded-md bg-blue-500 text-white">
-                              View Resume --{">"}
+                              View Resume 
+                            </button>
+                          </td>
+                          <td className="px-4 py-3">
+                            <button onClick={()=>handleClick(item)} className="cursor-pointer p-2 rounded-md bg-blue-500 text-white">
+                              Accept 
                             </button>
                           </td>
                         </tr>

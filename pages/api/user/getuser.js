@@ -15,7 +15,7 @@ export default async function temp(req, res) {
       data.id = doc.id;
       data.name = doc.data().name;
       data.email = doc.data().email;
-      data.phone = doc.data().personal.phone;
+      data.phone = doc.data()?.personal.phone;
       data.personal = doc.data().personal;
       data.referal_accepted = doc.data().referal_accepted;
       data.company = doc.data().company;

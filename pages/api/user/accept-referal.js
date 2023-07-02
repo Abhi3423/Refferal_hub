@@ -14,10 +14,15 @@ export default async function temp(req,res){
         querySnapshot.forEach((doc) => {
             data.referal_accepted=doc.data().referal_accepted;
         });
-        const referal_accepted=data.referal_accepted;
+        var referal_accepted=data.referal_accepted;
+        if(referal_accepted==undefined){
+            referal_accepted=[];
+        }
         referal_accepted.push({userEmail,name});
+        var referal_request=[];
         await updateDoc(docRef.ref, {
             referal_accepted: referal_accepted,
+            referal_request:referal_request
           });
           res.send({msg:"success"});
 
