@@ -14,22 +14,22 @@ const Navbar = ({ children }) => {
     {
       icon: <AiTwotoneAppstore />,
       display: "Profile",
-      to: "/dashboard/profile",
+      to: "/type/dashboard/profile",
     },
     {
       icon: <IoPersonAddSharp />,
       display: "Create Referral",
-      to: "/dashboard/create-referral",
+      to: "/type/dashboard/create-referral",
     },
     {
       icon: <FaClipboardList />,
       display: "Referral Invitations",
-      to: "/dashboard/invite-referrals",
+      to: "/type/dashboard/invite-referrals",
     },
     {
       icon: <AiFillCheckCircle />,
       display: "Referrals approved",
-      to: "/dashboard/approved-referrals",
+      to: "/typedashboard/approved-referrals",
     },
   ];
 

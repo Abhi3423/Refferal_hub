@@ -60,68 +60,42 @@ const Resume_info = () => {
           <div>{user?.currentUserDetails?.email}</div>
         </div>
       </div>
-
-      <div className="flex justify-center items-center w-full gap-4">
-        <span class="ml-3 text-sm font-medium text-gray-900 ">Recrute</span>
-        <label class="relative inline-flex items-center mr-5 cursor-pointer ">
-          <input
-            type="checkbox"
-            value={userType}
-            class="sr-only peer"
-            onChange={(e) => {
-              setUserType(e.target.value == "recrute" ? "hiree" : "recrute");
-              console.log(userType);
-            }}
-          />
-          <div class="w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-focus:ring-4 peer-focus:ring-teal-300 dark:peer-focus:ring-teal-800 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-teal-600"></div>
-          <span class="ml-3 text-sm font-medium text-gray-900 ">Hiree </span>
-        </label>
-      </div>
       <div>
         <div className="flex justify-center items-center w-full">
-          <div className="font-normal text-sm grid grid-cols-2 gap-x-40 items-center">
-            <label htmlFor="org">Your Field </label>
-            <input
-              className="w-fit px-4 py-2 border-solid border-[1.5px] border-[#E5E5E5] rounded-md font-semibold"
-              type="text"
-              name="yourField"
-              value={formik.values.yourField}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-            />
+        </div>
+        <div className="w-full flex justify-center items-center mt-4">
+          <div class="flex items-center justify-center w-1/4 ">
+            <label
+              for="dropzone-file"
+              class="flex flex-col items-center justify-center w-full h-32 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+              <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                <p class="mb-2 text-sm text-gray-500 dark:text-gray-400 font-semibold">
+                  Give Your Resume Link
+                </p>
+                <p class="text-xs text-gray-500 dark:text-gray-400">
+                  Doc, .PDF
+                </p>
+              </div>
+              <input
+                id="url"
+                type="url"
+                onChange={(e) => {
+                  console.log(e.target.value);
+                  formik.setFieldValue("resume", e.target.value);
+                }}
+                className="rounded-md"
+              />
+            </label>
           </div>
         </div>
-        <div class="flex items-center justify-center w-1/4 ">
-          <label
-            for="dropzone-file"
-            class="flex flex-col items-center justify-center w-full h-32 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
-            <div class="flex flex-col items-center justify-center pt-5 pb-6">
-              <p class="mb-2 text-sm text-gray-500 dark:text-gray-400 font-semibold">
-                Give Your Resumw Link
-              </p>
-              <p class="text-xs text-gray-500 dark:text-gray-400">
-                Doc, .PDF
-              </p>
-            </div>
-            <input
-              id="url"
-              type="url"
-              onChange={(e) => {
-                console.log(e.target.value);
-                formik.setFieldValue("resume", e.target.value);
-              }}
-              className="rounded-md"
-            />
-          </label>
+        <div className="flex justify-center items-center w-full">
+          <button
+            className="bg-green-500 w-fit py-2 px-4 rounded-lg text-white"
+            type="submit"
+            value="submit">
+            Next
+          </button>
         </div>
-      </div>
-      <div className="flex justify-center items-center w-full">
-        <button
-          className="bg-green-500 w-fit py-2 px-4 rounded-lg text-white"
-          type="submit"
-          value="submit">
-          Next
-        </button>
       </div>
     </form>
   );
