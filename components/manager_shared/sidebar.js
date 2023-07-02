@@ -111,7 +111,7 @@ const Navbar = ({ children }) => {
         <div
           className={
             sidebar
-              ? "h-full w-full lg:pl-[17rem] static overflow-y-hidden px-8 py-[80px] bg-blue-50 ease-in-out duration-500"
+              ? "h-full w-full lg:pl-[17rem] static px-8 py-[80px] bg-blue-50 ease-in-out duration-500"
               : "h-full w-full static overflow-visible px-8 py-[80px] bg-blue-50 ease-in-out duration-500"
           }>
           {children}
