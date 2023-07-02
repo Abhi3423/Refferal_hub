@@ -81,11 +81,11 @@ export default function Home() {
                 </a>
               </div>
               <div className="column align-right">
-                <div className="row items-center">
+                <div className="row items-center cursor-pointer">
                   {!currentUser.currentUser && (
-                    <Link href="#" className="u mr-lg">
+                    <div className="u mr-lg" onClick={(e) => handelSignUp(e)}>
                       Log in
-                    </Link>
+                    </div>
                   )}
                   {!currentUser.currentUser ? (
                     <div
@@ -130,11 +130,11 @@ export default function Home() {
                   referrals in your company with ease. Referral Hub uses
                   AI-generated scores to help you make informed decisions.
                 </p>
-                <Link
-                  href="/dashboard"
+                <div
+                  onClick={(e) => handelSignUp(e)}
                   className="button xl main mt-lg w-button">
                   Sign up now
-                </Link>
+                </div>
                 <div className="text-sm mt-md muted">
                   14 day free trial • No credit card required
                 </div>
@@ -263,11 +263,11 @@ export default function Home() {
                 <h1 className="max-w-lg text-giga text-center text-white">
                   Make smarter hiring decisions with Referral Hub.
                 </h1>
-                <Link
-                  href="/dashboard"
+                <div
+                  onClick={(e) => handelSignUp(e)}
                   className="button xl main white mt-lg w-button">
                   Sign up now
-                </Link>
+                </div>
                 <div className="faded text-sm mt-md">
                   14 day free trial • No credit card required
                 </div>
