@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
 import Layout from "@/components/manager_shared/layout";
 import { AuthContext } from "@/context/AuthContext";
+import success from './../../../public/assets/success.svg'
+import Image from "next/image";
 
 function Approved_referrals() {
   const useAuth = useContext(AuthContext);
@@ -35,15 +37,15 @@ function Approved_referrals() {
   return (
     <Layout>
       <div className="w-full bg-white rounded-lg p-4">
-        <section className="bg-gray-50 dark:bg-gray-900 p-3 sm:p-5">
+        <section className="bg-gray-50 p-3 sm:p-5">
           <div className="mx-auto max-w-screen-xl px-4 lg:px-12">
-            <div className="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
+            <div className="bg-white relative shadow-md sm:rounded-lg overflow-hidden">
               <div className="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
                 {/* title */}
               </div>
               <div className="overflow-x-auto">
-                <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                  <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                <table className="w-full text-sm text-left text-gray-500">
+                  <thead className="text-xs text-gray-700 uppercase bg-gray-50">
                     <tr>
                       <th scope="col" className="px-4 py-3">
                         Sr. No.
@@ -61,16 +63,17 @@ function Approved_referrals() {
                     {user?.map((item, index) => {
                       return (
                         <tr
-                          className="border-b dark:border-gray-700 "
+                          className="border-b"
                           key={index}>
                           <td className="px-4 py-3">{index + 1}</td>
                           <th
                             scope="row"
-                            className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            className="px-4 py-3 font-medium text-gray-600 whitespace-nowrap">
                             {item.name}
                           </th>
                           <td className="px-4 py-3">{item.userEmail}</td>
                           <td className="px-4 py-3">{item.resumeScore}</td>
+                          <td className="px-4 py-3"><Image src={success} alt="" width={30} height={30}></Image></td>
                         </tr>
                       );
                     })}
