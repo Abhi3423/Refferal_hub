@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
 import Layout from "@/components/manager_shared/layout";
 import { AuthContext } from "@/context/AuthContext";
+import success from './../../../public/assets/success.svg'
+import Image from "next/image";
 
 function Approved_referrals() {
   const useAuth = useContext(AuthContext);
@@ -71,6 +73,7 @@ function Approved_referrals() {
                           </th>
                           <td className="px-4 py-3">{item.userEmail}</td>
                           <td className="px-4 py-3">{item.resumeScore}</td>
+                          <td className="px-4 py-3"><Image src={success} alt="" width={30} height={30}></Image></td>
                         </tr>
                       );
                     })}

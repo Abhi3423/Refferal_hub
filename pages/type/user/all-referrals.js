@@ -96,7 +96,7 @@ console.log(resumeScore)
   return (
     <>
       <Layout>
-        <div className="text-gray-600 bg-blue-50">
+        <div className="text-gray-600">
           <div className="px-5 mx-auto">
             <div className="flex gap-4 flex-wrap">
               {data?.map((item, index) => {
