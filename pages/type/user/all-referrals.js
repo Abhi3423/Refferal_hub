@@ -61,6 +61,7 @@ const handleClick=async function(item){
     
     generateKeywords(jobTitle, jobDescription)
       .then(keywords => {
+  
         setResumeScore(calculateMatchingScore(resume,keywords));
       })
       .catch(err => {
@@ -78,6 +79,7 @@ const handleClick=async function(item){
     }),
       })
 }
+console.log(resumeScore)
 
     return(
         <>

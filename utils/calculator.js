@@ -7,20 +7,18 @@ const configuration = new Configuration({
 const openai = new OpenAIApi(configuration);
 export const generateKeywords= async function(jobTitle, jobDescription) {
 
-    const prompt = `Job title: ${jobTitle}\n\nJob description: ${jobDescription}\n\nKeywords:`;
+    const prompt = `Job title: ${jobTitle}\n\nJob description: ${jobDescription}\n\n Keywords: [Please generate array of more than 10 keywords here such that is can be converted into array using splice(,)]`;
   const response = await openai.createCompletion({
     model: "text-davinci-003",
     prompt: prompt,
     temperature: 0.9,
     max_tokens: 150,
-    top_p: 1,
-    frequency_penalty: 0.0,
-    presence_penalty: 0.6,
-    stop: '\n\n',
+    n: 1
   });
   // var array = JSON.parse("[" +  + "]");
   var string = response.data.choices[0].text;
-  var array = string.split(",");
+  console.log(string);
+  var array = string.split(", ");
   // console.log(array);
   return array;
   }
@@ -49,8 +47,8 @@ export function calculateMatchingScore(resume,keywords) {
 
   let matchingScore = 0;
   for (const keyword of keywordArray) {
-    if (resumeText.search(keyword)!=-1) {
-      matchingScore++;
+    if (resumeText.includes(keyword)) {
+      matchingScore += 1;
     }
   }
   console.log(matchingScore)
