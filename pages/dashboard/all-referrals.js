@@ -86,7 +86,7 @@ const handleClick=async function(item){
   <h2 className=" text-center p-6">ALL Referrals</h2>
     <div className="-my-8 divide-y-2 divide-gray-100">
     {data?.map((item,index)=>{
-       return <div className="py-8 flex flex-wrap md:flex-nowrap w-1/2 mt-4 m-auto bg-white rounded-lg p-4">
+       return <div key={index} className="py-8 flex flex-wrap md:flex-nowrap w-1/2 mt-4 m-auto bg-white rounded-lg p-4">
         <div className="md:flex-grow ">
           <h2 className="text-2xl font-medium text-gray-900 title-font mb-2">{item?.refForm?.position}</h2>
           <h4 className=" pb-4 font-normal">{item?.refForm?.company_name}</h4>
