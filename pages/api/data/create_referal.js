@@ -13,7 +13,6 @@ import {
 export default async function createUser(req, res) {
   try {
     const { email, refForm } = req.body;
-
     const user = collection(db, "referral");
     const q = query(user, where("email", "==", email));
     const querySnapshot = await getDocs(q);

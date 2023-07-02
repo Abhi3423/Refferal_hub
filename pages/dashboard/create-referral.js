@@ -9,7 +9,6 @@ function Create_referral() {
   const user = useContext(AuthContext);
   const [refForm, setRefForm] = useState({});
   const router = useRouter();
-
   const [skills, setSkills] = useState([]);
   const [currentSkill, setCurrentSkill] = useState("");
 
@@ -28,21 +27,21 @@ function Create_referral() {
     setSkills(skills.filter((s) => s !== skill));
   };
 
-
   const onSubmit = async (e) => {
     e.preventDefault();
+    setRefForm({ ...refForm, skill: skills });
     if (
       !refForm?.position ||
       !refForm?.city ||
       !refForm?.company_name ||
       !refForm?.min_experience ||
       !refForm?.job_description ||
-      !refForm?.skill
-    )
+      !skills.length
+    ) {
       alert("Please fill all the fields");
+      return;
+    }
 
-    setRefForm({ ...refForm, skill: skills })
-    console.log(refForm)
     try {
       const res = await fetch("/api/data/create_referal", {
         method: "POST",
@@ -81,7 +80,9 @@ function Create_referral() {
           <div class="lg:col-span-2">
             <div class="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5">
               <div class="md:col-span-5">
-                <label className="font-medium text-gray-700" for="full_name">Full Name</label>
+                <label className="font-medium text-gray-700" for="full_name">
+                  Full Name
+                </label>
                 <input
                   type="text"
                   disabled="disabled"
@@ -94,7 +95,9 @@ function Create_referral() {
               </div>
 
               <div class="md:col-span-3">
-                <label className="font-medium text-gray-700" for="address">Referral Position </label>
+                <label className="font-medium text-gray-700" for="address">
+                  Referral Position{" "}
+                </label>
                 <input
                   type="text"
                   name="address"
@@ -109,7 +112,9 @@ function Create_referral() {
               </div>
 
               <div class="md:col-span-2">
-                <label className="font-medium text-gray-700" for="city">City</label>
+                <label className="font-medium text-gray-700" for="city">
+                  City
+                </label>
                 <input
                   type="text"
                   name="city"
@@ -123,7 +128,9 @@ function Create_referral() {
                 />
               </div>
               <div class="md:col-span-3">
-                <label className="font-medium text-gray-700" for="address">Company Name </label>
+                <label className="font-medium text-gray-700" for="address">
+                  Company Name{" "}
+                </label>
                 <input
                   type="text"
                   name="address"
@@ -138,7 +145,9 @@ function Create_referral() {
               </div>
 
               <div class="md:col-span-2">
-                <label className="font-medium text-gray-700" for="city">Minimum Experience (yr)</label>
+                <label className="font-medium text-gray-700" for="city">
+                  Minimum Experience (yr)
+                </label>
                 <input
                   type="number"
                   name="minExp"
@@ -153,7 +162,9 @@ function Create_referral() {
               </div>
 
               <div className="md:col-span-5">
-                <label className="block mb-2 font-medium text-gray-700">Skills</label>
+                <label className="block mb-2 font-medium text-gray-700">
+                  Skills
+                </label>
                 <div className="flex flex-col flex-wrap gap-2">
                   <div className="flex items-center">
                     <input
@@ -166,8 +177,7 @@ function Create_referral() {
                     />
                     <button
                       className="px-4 py-2 ml-2 text-white bg-blue-500 rounded-md"
-                      onClick={handleAddSkill}
-                    >
+                      onClick={handleAddSkill}>
                       Add
                     </button>
                   </div>
@@ -177,29 +187,31 @@ function Create_referral() {
                       <div
                         key={skill}
                         className="w-fit flex items-center px-3 py-1 rounded-md bg-blue-500 text-white cursor-pointer"
-                        onClick={() => handleRemoveSkill(skill)}
-                      >
+                        onClick={() => handleRemoveSkill(skill)}>
                         <span>{skill}</span>
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           className="ml-1 w-4 h-4 text-white"
                           fill="none"
                           viewBox="0 0 24 24"
-                          stroke="currentColor"
-                        >
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                          stroke="currentColor">
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M6 18L18 6M6 6l12 12"
+                          />
                         </svg>
                       </div>
                     ))}
-
                   </div>
-
                 </div>
               </div>
 
-
               <div class="md:col-span-5">
-                <label className="font-medium text-gray-700" for="state">Job Description</label>
+                <label className="font-medium text-gray-700" for="state">
+                  Job Description
+                </label>
                 <textarea
                   name="job_description"
                   id="job_description"
