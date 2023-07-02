@@ -21,7 +21,7 @@ export const generateKeywords= async function(jobTitle, jobDescription) {
   // var array = JSON.parse("[" +  + "]");
   var string = response.data.choices[0].text;
   var array = string.split(",");
-  console.log(array);
+  // console.log(array);
   return array;
   }
   
@@ -42,19 +42,19 @@ export const generateKeywords= async function(jobTitle, jobDescription) {
   //   });
   // }, []);
 
-export function calculateMatchingScore(resume, keywords) {
-    const resumeText = JSON.stringify(resume).toLowerCase(); // Convert the resume to lowercase string
-    const keywordArray = keywords.map(keyword => keyword.toLowerCase()); // Convert the keywords to lowercase array
-  
-    let matchingScore = 0;
-    for (const keyword of keywordArray) {
-      if (resumeText.includes(keyword)) {
-        matchingScore++;
-      }
-    }
-  
+export function calculateMatchingScore(resume,keywords) {
+  const resumeText = JSON.stringify(resume).toLowerCase(); // Convert the resume to lowercase string
+  const keywordArray = keywords.map(keyword => keyword.toLowerCase()); // Convert the keywords to lowercase array
+  console.log(keywordArray)
 
-    return (matchingScore/keywords.length)*100;
+  let matchingScore = 0;
+  for (const keyword of keywordArray) {
+    if (resumeText.search(keyword)!=-1) {
+      matchingScore++;
+    }
+  }
+  console.log(matchingScore)
+  return (matchingScore);
 }
 
   
