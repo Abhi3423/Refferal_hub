@@ -19,7 +19,7 @@ function Invite_referrals() {
     const data = await res.json();
     const temp = data?.data?.pending_invites;
     var newdata=[];
-    temp.map((item)=>{
+    temp?.map((item)=>{
         if(!item.accepted){
             newdata.push(item)
         }

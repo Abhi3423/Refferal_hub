@@ -20,7 +20,7 @@ function Approved_referrals() {
     const temp = data?.data?.pending_invites;
     //store invites with accepted equals true
     var newdata=[];
-    temp.map((item)=>{
+    temp?.map((item)=>{
         if(item.accepted){
             newdata.push(item)
         }
