@@ -1,4 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
+import FormData from "form-data";
 import Image from "next/image";
 import { AuthContext } from "@/context/AuthContext";
 import { useFormik } from "formik";
@@ -8,7 +9,9 @@ import { useRouter } from "next/router";
 const Resume_info = () => {
   const user = useContext(AuthContext);
   const [userType, setUserType] = useState("recrute");
+  const [isLoading, setIsLoading] = useState(false);
   const { setFullDetails, fullDetails } = useContext(AuthContext);
+  const [resume, setResume] = useState();
 
   const formik = useFormik({
     initialValues: {
@@ -43,6 +46,39 @@ const Resume_info = () => {
     },
   });
 
+  //fetch resume parser
+  const resumeParser = async () => {
+    setIsLoading(true);
+    console.log(resume);
+    const form = new FormData();
+    form.append("providers", "affinda");
+    form.append("file", resume);
+    const url = "https://api.edenai.run/v2/ocr/resume_parser";
+    const apiKey =
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNzM4NjU2NWYtZWFjYS00MmJlLTk1NDItZDRjODIyYzNmODY1IiwidHlwZSI6ImFwaV90b2tlbiJ9.E3idlR05Fq_vrZsYRdyKEcirb_CN4JjxRQ-64SKYF0M";
+    const options = {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+      },
+      body: form,
+    };
+    try {
+      await fetch(url, options)
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+      setIsLoading(false);
+    } catch (error) {
+      setIsLoading(false);
+      console.error(error);
+    }
+  };
+  // fetch end
   return (
     <form className="flex flex-col gap-4 mt-4" onSubmit={formik.handleSubmit}>
       <div className="w-full flex gap-5 justify-center items-center">
@@ -59,18 +95,22 @@ const Resume_info = () => {
         </div>
       </div>
       <div>
-        <div className="flex justify-center items-center w-full">
-        </div>
+        <div className="flex justify-center items-center w-full"></div>
         <div className="flex justify-center items-center w-full">
           <div className="font-normal text-sm grid grid-cols-2 gap-x-40 items-center">
             <label htmlFor="org">Resume Upload Link </label>
             <input
               className="w-fit px-4 py-2 border-solid border-[1.5px] border-[#E5E5E5] rounded-md font-semibold"
-              type="text"
+              type="file"
               name="resume"
-              value={formik.values.resume}
-              onChange={formik.handleChange}
+              // value={formik.values.resume}
+              // onChange={formik.handleChange}
               onBlur={formik.handleBlur}
+              onChange={(e) => {
+                formik.setFieldValue("resume", e.target.files[0]);
+                setResume(e.target.files[0]);
+                resumeParser();
+              }}
             />
             {formik.touched.resume && formik.errors.resume ? (
               <div className="text-red-500 text-xs col-start-2 mt-1">
@@ -81,36 +121,13 @@ const Resume_info = () => {
             )}
           </div>
         </div>
-        {/* <div className="w-full flex justify-center items-center mt-4">
-          <div class="flex items-center justify-center w-1/4 ">
-            <label
-              for="dropzone-file"
-              class="flex flex-col items-center justify-center w-full h-32 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
-              <div class="flex flex-col items-center justify-center pt-5 pb-6">
-                <p class="mb-2 text-sm text-gray-500 dark:text-gray-400 font-semibold">
-                  Give Your Resume Link
-                </p>
-                <p class="text-xs text-gray-500 dark:text-gray-400">
-                  Doc, .PDF
-                </p>
-              </div>
-              <input
-                id="url"
-                type="url"
-                onChange={(e) => {
-                  console.log(e.target.value);
-                  formik.setFieldValue("resume", e.target.value);
-                }}
-                className="rounded-md"
-              />
-            </label>
-          </div>
-        </div> */}
+
         <div className="flex justify-center items-center w-full">
           <button
             className="bg-green-500 w-fit py-2 px-4 rounded-lg text-white"
             type="submit"
-            value="submit">
+            value="submit"
+            disabled={isLoading}>
             Next
           </button>
         </div>
