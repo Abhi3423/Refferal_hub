@@ -3,10 +3,14 @@ import { generateKeywords } from "@/utils/calculator";
 import { calculateMatchingScore } from "@/utils/calculator";
 import { AuthContext } from "@/context/AuthContext";
 import Layout from "@/components/candidate_shared/layout";
+import { useRouter } from "next/router";
+
 
 function All_referrals() {
 
   const [data, setData] = React.useState([]);
+    const router = useRouter();
+
   const useAuth = useContext(AuthContext);
   // console.log(useAuth.currentUser)
   async function getData() {
@@ -77,12 +81,17 @@ function All_referrals() {
         adminEmail: item.email,
         userEmail: useAuth?.currentUser?.email,
         resumeScore,
-        name: useAuth?.currentUser?.displayName,
-        form: item?.refForm,
-      }),
-    })
-  }
-  console.log(resumeScore)
+        name:useAuth?.currentUser?.displayName,
+        form:item?.refForm,
+    }),
+      })
+      const resp=await data.json();
+      if(resp.msg=='success'){
+        alert('Applied Successfully');
+        router.push('/type/user/invites');
+      }
+}
+console.log(resumeScore)
 
   return (
     <>

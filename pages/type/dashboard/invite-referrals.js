@@ -2,11 +2,13 @@ import React, { useContext, useState, useEffect } from "react";
 import Layout from "@/components/manager_shared/layout";
 import { AuthContext } from "@/context/AuthContext";
 import { FaUnderline } from "react-icons/fa";
+import { useRouter } from "next/router";
+
 
 function Invite_referrals() {
   const useAuth = useContext(AuthContext);
   const [email, setEmail] = useState("");
-
+  const router = useRouter();
   const [user, setUser] = useState([]);
 
   const handleClick= async function(item){
@@ -21,7 +23,8 @@ function Invite_referrals() {
     const res=await data.json();
     if(res.msg=="success"){
       alert("Referal Accepted");
-    window.location.href="/type/dashboard/approved-referrals";
+      router.push("/type/dashboard/approved-referrals");
+    
     }
   }
 
