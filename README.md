@@ -1,4 +1,4 @@
-<h1 >Web App for Job Referral</h1> 
+![Screenshot (63)](https://github.com/Abhi3423/Refferal_hub/assets/110845672/f72b1e30-1c3a-4e07-8116-85ee20952ae2)<h1 >Web App for Job Referral</h1> 
 
 The web app for job referral is a comprehensive platform that serves as a centralized hub for job referrals, resume analysis using AI, and ranking students based on their resume scores. It aims to provide an excellent platform for individuals to discover and seize job opportunities. The key features of the project include Google Sign-In for authentication, Next.js for enhanced efficiency, Firestore database for real-time updates, and two user modes: hirer and student.
 
@@ -22,6 +22,12 @@ By combining these features, the web app for job referral provides a powerful pl
 
 Overall, the web app for job referral aims to streamline the job search and hiring process by leveraging AI, real-time updates, and user-friendly features, ultimately bridging the gap between job seekers and employers in a more effective and efficient manner.
 
+<h2>Tech Stack used :</h2>
+
+<h4>Next Js</h4>
+<h4>FireStore</h4>
+<h4>Tailwind CSS</h4>
+<h4>Material UI</h4>
 
 
 ## Setting up Project
