@@ -8,7 +8,7 @@ export default async function temp(req,res){
         const userEmail=req.body.userEmail;
         const resumeScore=req.body.resumeScore;
         const name=req.body.name;
-        // console.log(req.body);
+        console.log(req.body);
         const q = query(collection(db, "refferar"), where("email", "==", adminEmail));
         const querySnapshot = await getDocs(q);
         const data={};
@@ -17,7 +17,10 @@ export default async function temp(req,res){
             data.referal_request=doc.data().referal_request;
         }
         );
-        const referal_request=data.referal_request;
+        var referal_request=data.referal_request;
+        if(referal_request==undefined){
+            referal_request=[];
+        }
        referal_request.push({userEmail:userEmail,resumeScore:resumeScore,name:name});
        await updateDoc(docRef.ref, {
         referal_request: referal_request,
