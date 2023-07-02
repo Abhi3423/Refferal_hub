@@ -29,7 +29,7 @@ const Navbar = ({ children }) => {
     {
       icon: <AiFillCheckCircle />,
       display: "Referrals approved",
-      to: "/typedashboard/approved-referrals",
+      to: "/type/dashboard/approved-referrals",
     },
   ];
 

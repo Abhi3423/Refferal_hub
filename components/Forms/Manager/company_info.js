@@ -13,21 +13,17 @@ const Company_info = () => {
   const formik = useFormik({
     initialValues: {
       currentOrg: "",
-      yourField: "",
       location: "",
       position: "",
-      resume: "",
       servedMonths: undefined,
     },
     validationSchema: Yup.object().shape({
-      // currentOrg: Yup.string().required("* Current company is required"),
-      // location: Yup.string().required("* Location is required"),
-      // position: Yup.string().required("* Position is required"),
-      // servedMonths: Yup.number()
-      //   .required("* Served months is required")
-      //   .min(1, "Minimum 1 month of service required"),
-      // resume: Yup.string().required("* Resume is required"),
-      // yourRole: Yup.string().required("* Your role is required"),
+      currentOrg: Yup.string().required("* Current company is required"),
+      location: Yup.string().required("* Location is required"),
+      position: Yup.string().required("* Position is required"),
+      servedMonths: Yup.number()
+        .required("* Served months is required")
+        .min(1, "Minimum 1 month of service required"),
     }),
     onSubmit: async (values) => {
       console.log(values);
