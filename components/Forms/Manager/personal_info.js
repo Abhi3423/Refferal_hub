@@ -19,7 +19,11 @@ const Personal_info = () => {
     },
     validationSchema: Yup.object().shape({
       gender: Yup.string().required("* Gender is required"),
-      phoneNumber: Yup.string().required("* Phone number is required"),
+      phoneNumber: Yup.string()
+      .required("* Mobile number is required")
+      .min(10, "Mobile number must be 10 digits")
+      .max(10, "Mobile number must be 10 digits")
+      .matches(/^\d+$/, "Invalid phone number"),
       country: Yup.string().required("* Country is required"),
       state: Yup.string().required("* State is required"),
     }),

@@ -1,10 +1,10 @@
 import Image from "next/image";
 import { useContext } from "react";
 import { Inter } from "next/font/google";
-import Stepper from "@/components/Cards/stepper";
+import Stepper from "@/components/Cards/user_stepper";
 import Personal_info from "@/components/Forms/Candidate/personal_info";
 import Resume_info from "@/components/Forms/Candidate/resume";
-import Confirmation from "@/components/Forms/Manager/confirmation";
+import Confirmation from "@/components/Forms/Candidate/confirmation";
 import { AuthContext } from "@/context/AuthContext";
 
 const inter = Inter({ subsets: ["latin"] });
