@@ -9,90 +9,88 @@ import { useRouter } from "next/router";
 function All_referrals() {
 
   const [data, setData] = React.useState([]);
+  const [user, setUser] = React.useState([]);
+  const [resume, setResume] = React.useState([]);
     const router = useRouter();
+    const [item, setItem] = useState({});
 
   const useAuth = useContext(AuthContext);
   // console.log(useAuth.currentUser)
+async function getUser() {
+    //post request paasing email
+    const res = await fetch("/api/user/getuser", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email: useAuth.currentUser.email }),
+    });
+    const data = await res.json();
+    // console.log(data);
+    setUser(data.data);
+    setResume(data.data?.resume.affinda.extracted_data);
+  }
+
   async function getData() {
     const res = await fetch("/api/referal/get-all-referral");
     const data = await res.json();
     setData(data.data);
   }
   useEffect(() => {
+    if(useAuth.currentUser?.email){
+    getUser();
+    }
+  }, [useAuth.currentUser]);
+  useEffect(() => {
+    
     getData();
+    
   }, []);
   // console.log(data[0]?.refForm.position);
-  const [resumeScore, setResumeScore] = useState(0);
+  const [resumeScore, setResumeScore] = useState(-1);
 
   const handleClick = async function (item) {
+    setItem(item);
     const jobTitle = item?.refForm?.position
     const jobDescription = item?.refForm?.job_description
 
-    const resume = {
-      "name": "Tushar Shingane",
-      "email": "tusharshingane1234@gmail.com",
-      "phone": "+91-9022176049",
-      "degree": "BTech",
-      "university": [
-        "High School",
-        "Indian Institute of Technology ( BHU )",
-        "Secondary School",
-        "Shri RamKrishna Krida Junior College"
-      ],
-      "Companies worked at": [],
-      "designation": [],
-      "Experience durations": "",
-      "skills": [
-        "Documentation",
-        "Css",
-        "Git",
-        "Presentation",
-        "Bootstrap",
-        "Postman",
-        "Time management",
-        "Programming",
-        "Python",
-        "C/c++",
-        "React",
-        "Anaconda",
-        "Github",
-        "Pandas",
-        "Numpy",
-        "Javascript",
-        "Flask"
-      ],
-      "total_exp": 0
-    }
-
     generateKeywords(jobTitle, jobDescription)
       .then(keywords => {
-
         setResumeScore(calculateMatchingScore(resume, keywords));
       })
       .catch(err => {
         console.error('Error:', err);
       });
-    const data = await fetch('/api/user/apply', {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        adminEmail: item.email,
-        userEmail: useAuth?.currentUser?.email,
-        resumeScore,
-        name:useAuth?.currentUser?.displayName,
-        form:item?.refForm,
-    }),
-      })
-      const resp=await data.json();
-      if(resp.msg=='success'){
-        alert('Applied Successfully');
-        router.push('/type/user/invites');
-      }
+      
 }
-console.log(resumeScore)
+useEffect(() => {
+  if(resumeScore!==-1)
+  handleADD();
+}, [resumeScore]);
 
+async function handleADD(){
+  const data = await fetch('/api/user/apply', {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      adminEmail: item.email,
+      userEmail: useAuth?.currentUser?.email,
+      resumeScore,
+      name:useAuth?.currentUser?.displayName,
+      form:item?.refForm,
+  }),
+    })
+    const resp=await data.json();
+    if(resp.msg=='success'){
+      alert('Applied Successfully');
+      router.push('/type/user/invites');
+    }
+  
+}
+
+// console.log(resumeScore);
   return (
     <>
       <Layout>
