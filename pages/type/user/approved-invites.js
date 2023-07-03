@@ -8,7 +8,7 @@ function Approved_referrals() {
 
   const [user, setUser] = useState([]);
   async function getUser() {
-    //     
+    //
     const res = await fetch("/api/user/getuser", {
       method: "POST",
       headers: {
@@ -22,9 +22,9 @@ function Approved_referrals() {
     var newdata = [];
     temp?.map((item) => {
       if (item.accepted) {
-        newdata.push(item)
+        newdata.push(item);
       }
-    })
+    });
 
     setUser(newdata);
   }

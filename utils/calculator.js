@@ -1,49 +1,76 @@
-import { useState } from "react";
-import { OpenAIApi, Configuration } from 'openai';
+// import { useState } from "react";
+// import { OpenAIApi, Configuration } from "openai";
 
-const configuration = new Configuration({
-  apiKey: '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',
-});
-const openai = new OpenAIApi(configuration);
-export const generateKeywords= async function(jobTitle, jobDescription) {
+// const configuration = new Configuration({
+//   apiKey: "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",
+// });
+const apiKey = "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";
+// const openai = new OpenAIApi(configuration);
+export const generateKeywords = async function (jobTitle, jobDescription) {
+  console.log(jobTitle, jobDescription);
+  const prompt = `Job title: ${jobTitle}\n\nJob description: ${jobDescription}\n\n Keywords: [Please generate array of more than 10 keywords here such that is can be converted into array using splice(,)]`;
+  // const response = await openai.createCompletion({
+  //   model: "text-davinci-003",
+  //   prompt: prompt,
+  //   temperature: 0.9,
+  //   max_tokens: 150,
+  //   n: 1,
+  // });
 
-    const prompt = `Job title: ${jobTitle}\n\nJob description: ${jobDescription}\n\n Keywords: [Please generate array of more than 10 keywords here such that is can be converted into array using splice(,)]`;
-  const response = await openai.createCompletion({
-    model: "text-davinci-003",
-    prompt: prompt,
-    temperature: 0.9,
-    max_tokens: 150,
-    n: 1
-  });
-  // var array = JSON.parse("[" +  + "]");
-  var string = response.data.choices[0].text;
+  const requestOptions = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + String(apiKey),
+    },
+    body: JSON.stringify({
+      prompt: prompt,
+      temperature: 0.9,
+      max_tokens: 150,
+      n: 1,
+    }),
+  };
+
+  const response = await fetch(
+    "https://api.openai.com/v1/engines/text-davinci-003/completions",
+    requestOptions
+  )
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data);
+      return data;
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+
+  var string = response?.choices[0].text;
   console.log(string);
   var array = string.split(", ");
-  // console.log(array);
+  console.log(array);
   return array;
-  }
-  
-  // import { generateKeywords } from "@/utils/calculator";
+};
 
-  // const [keywords, setKeywords] = useState([]); 
-  // const jobTitle = 'Software Engineer';
-  // const jobDescription = 'We are looking for a skilled Software Engineer with experience in JavaScript, React, and Node.js. The ideal candidate should have a strong understanding of web development principles and be able to work in an agile team environment.';
-  
+// import { generateKeywords } from "@/utils/calculator";
 
-  // useEffect(() => {
-  //   generateKeywords(jobTitle, jobDescription)
-  //   .then(keywords => {
-  //     setKeywords(keywords);
-  //   })
-  //   .catch(err => {
-  //     console.error('Error:', err);
-  //   });
-  // }, []);
+// const [keywords, setKeywords] = useState([]);
+// const jobTitle = 'Software Engineer';
+// const jobDescription = 'We are looking for a skilled Software Engineer with experience in JavaScript, React, and Node.js. The ideal candidate should have a strong understanding of web development principles and be able to work in an agile team environment.';
 
-export function calculateMatchingScore(resume,keywords) {
+// useEffect(() => {
+//   generateKeywords(jobTitle, jobDescription)
+//   .then(keywords => {
+//     setKeywords(keywords);
+//   })
+//   .catch(err => {
+//     console.error('Error:', err);
+//   });
+// }, []);
+
+export function calculateMatchingScore(resume, keywords) {
   const resumeText = JSON.stringify(resume).toLowerCase(); // Convert the resume to lowercase string
-  const keywordArray = keywords.map(keyword => keyword.toLowerCase()); // Convert the keywords to lowercase array
-  console.log(keywordArray)
+  const keywordArray = keywords.map((keyword) => keyword.toLowerCase()); // Convert the keywords to lowercase array
+  console.log(keywordArray);
 
   let matchingScore = 0;
   for (const keyword of keywordArray) {
@@ -51,8 +78,6 @@ export function calculateMatchingScore(resume,keywords) {
       matchingScore += 5.5366;
     }
   }
-  console.log(matchingScore)
-  return (matchingScore+60);
+  console.log(matchingScore);
+  return matchingScore + 60;
 }
-
-  
