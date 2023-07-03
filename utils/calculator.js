@@ -20,7 +20,6 @@ export const generateKeywords= async function(jobTitle, jobDescription) {
   var string = response.data.choices[0].text;
   console.log(string);
   var array = string.split(", ");
-  // console.log(array);
   return array;
   }
   
