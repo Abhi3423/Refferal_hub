@@ -2,7 +2,7 @@ import { useState } from "react";
 import { OpenAIApi, Configuration } from 'openai';
 
 const configuration = new Configuration({
-  apiKey: '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',
+  apiKey: process.env.NEXT_PUBLIC_OPENAI_APIKEY,
 });
 const openai = new OpenAIApi(configuration);
 export const generateKeywords= async function(jobTitle, jobDescription) {
