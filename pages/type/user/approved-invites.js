@@ -8,7 +8,7 @@ function Approved_referrals() {
 
   const [user, setUser] = useState([]);
   async function getUser() {
-//     
+    //     
     const res = await fetch("/api/user/getuser", {
       method: "POST",
       headers: {
@@ -19,13 +19,13 @@ function Approved_referrals() {
     const data = await res.json();
     const temp = data?.data?.pending_invites;
     //store invites with accepted equals true
-    var newdata=[];
-    temp?.map((item)=>{
-        if(item.accepted){
-            newdata.push(item)
-        }
+    var newdata = [];
+    temp?.map((item) => {
+      if (item.accepted) {
+        newdata.push(item)
+      }
     })
-    
+
     setUser(newdata);
   }
   useEffect(() => {
@@ -34,7 +34,7 @@ function Approved_referrals() {
       getUser();
     }
   }, [email]);
-console.log(user);
+  console.log(user);
   useEffect(() => {
     setEmail(useAuth.currentUser.email);
   }, [useAuth.currentUser.email]);
@@ -53,9 +53,6 @@ console.log(user);
                   <thead className="text-xs text-gray-700 uppercase bg-gray-50">
                     <tr>
                       <th scope="col" className="px-4 py-3">
-                        Sr. No.
-                      </th>
-                      <th scope="col" className="px-4 py-3">
                         Manager name
                       </th>
                       <th scope="col" className="px-4 py-3">
@@ -68,7 +65,7 @@ console.log(user);
                         Position
                       </th>
                       <th scope="col" className="px-4 py-3">
-                        Minimum Experience
+                        Contact
                       </th>
                     </tr>
                   </thead>
@@ -76,19 +73,19 @@ console.log(user);
                   <tbody>
                     {user?.map((item, index) => {
                       return (
-                        <tr
-                          className="border-b "
-                          key={index}>
+                        <tr className="border-b " key={index}>
                           <td className="px-4 py-3">{index + 1}</td>
                           <th
                             scope="row"
                             className="px-4 py-3 font-medium text-gray-600 whitespace-nowrap">
                             {item.recruiterName}
                           </th>
-                          <td className="px-4 py -3">{item?.form?.company_name}</td>
+                          <td className="px-4 py -3">
+                            {item?.form?.company_name}
+                          </td>
                           <td className="px-4 py-3">{item?.form?.city}</td>
                           <td className="px-4 py-3">{item?.form?.position}</td>
-                          <td className="px-4 py-3">{item?.form?.min_experience}</td>
+                          <td className="px-4 py-3">{item?.adminEmail}</td>
                         </tr>
                       );
                     })}
