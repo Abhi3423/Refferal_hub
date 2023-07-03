@@ -2,6 +2,7 @@ import { useState } from "react";
 import { OpenAIApi, Configuration } from 'openai';
 
 const configuration = new Configuration({
+  organization: "org-iOUgrhP1WtQWIQN0zQiFtLqb",
   apiKey: process.env.NEXT_PUBLIC_OPENAI_APIKEY,
 });
 const openai = new OpenAIApi(configuration);
