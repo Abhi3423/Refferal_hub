@@ -123,7 +123,7 @@ function Profile() {
 
           </div>
           <div className="flex justify-center items-center w-full">
-            <div className="font-bold text-sm grid grid-rows-2 md:grid-cols-2 gap-x-40 items-center md:text-center p-4">
+            <div className="font-bold text-sm grid grid-rows-2 md:grid-cols-2 gap-x-40 items-center md:text-center p-3">
               <button onClick={() => handleClick()} className="cursor-pointer p-2 rounded-md bg-blue-500 text-white">
                 View Resume
               </button>
