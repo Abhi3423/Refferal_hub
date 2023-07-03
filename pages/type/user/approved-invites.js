@@ -53,6 +53,9 @@ function Approved_referrals() {
                   <thead className="text-xs text-gray-700 uppercase bg-gray-50">
                     <tr>
                       <th scope="col" className="px-4 py-3">
+                        Sr. No.
+                      </th>
+                      <th scope="col" className="px-4 py-3">
                         Manager name
                       </th>
                       <th scope="col" className="px-4 py-3">
